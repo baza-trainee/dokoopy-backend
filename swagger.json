@@ -1,0 +1,39 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Dokoopy 1.0.0",
+        "description": "API for charity landing page of 57th brigade.\n\nThis Server based on the OpenAPI 3.0 specification\n\nSome useful links:\n- [The Dokoopy-backend repository](https://github.com/baza-trainee/dokoopy-backend)",
+        "contact": {
+            "name": "API developers",
+            "email": ""
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5001/api",
+            "description": "Development Server"
+        },
+        {
+            "url": "",
+            "description": "Production Server"
+        }
+    ],
+    "consumes": [
+        "application/json",
+        "text/html"
+    ],
+    "produces": [
+        "application/json",
+        "text/html"
+    ],
+    "tags": [
+    ],
+    "paths": {
+    },
+    "components": {
+        "schemas": {
+        
+        }
+    }
+}
