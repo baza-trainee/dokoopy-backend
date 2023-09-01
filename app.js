@@ -13,7 +13,6 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res, next) => {
     res.render('index', {
         heading: 'Dokoopy',
-        text: 'Some text',
         time: (new Date().toUTCString())
     })
 })
