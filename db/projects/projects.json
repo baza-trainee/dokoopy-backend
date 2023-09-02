@@ -1,0 +1,22 @@
+[
+    {
+        "id": "dfkjdgjhjhggghh",
+        "description": "Project 1",
+        "imageURL": "/projects/1.jpg"
+    },
+    {
+        "id": "1234345",
+        "description": "Project 2",
+        "imageURL": "/projects/2.jpg"
+    },
+    {
+        "id": "dfsgdfghhgh",
+        "description": "Project 3",
+        "imageURL": "/projects/3.jpg"
+    },
+    {
+        "id": "dsfdgfhgfhfhg",
+        "description": "Project 4",
+        "imageURL": "/projects/4.jpg"
+    }
+]
