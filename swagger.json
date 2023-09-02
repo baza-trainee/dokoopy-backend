@@ -21,13 +21,19 @@
     ],
     "consumes": [
         "application/json",
+        "multipart/form-data",
         "text/html"
     ],
     "produces": [
         "application/json",
+        "multipart/form-data",
         "text/html"
     ],
     "tags": [
+        {
+            "name": "Main",
+            "description": "Main"
+        }
     ],
     "paths": {
     },
