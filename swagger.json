@@ -11,29 +11,118 @@
     },
     "servers": [
         {
-            "url": "http://localhost:5001",
+            "url": "http://localhost:5001/api",
             "description": "Development Server"
         },
         {
-            "url": "https://dokoopy.onrender.com",
+            "url": "https://dokoopy.onrender.com/api",
             "description": "Production Server"
+        },
+        {
+            "url": "https://dokoopy-pr-{PR_number}.onrender.com/api",
+            "description": "Test Server for current Pull Request"
         }
     ],
     "consumes": [
         "application/json",
+        "multipart/form-data",
         "text/html"
     ],
     "produces": [
         "application/json",
+        "multipart/form-data",
         "text/html"
     ],
     "tags": [
+        {
+            "name": "Main",
+            "description": "Main page"
+        }
     ],
     "paths": {
+        "/main": {
+            "get": {
+                "summary": "Get all partners and projects",
+                "tags": [
+                    "Main"
+                ],
+                "description": "Returns all partners and projects from the DB",
+                "operationId": "getAllProjectsAndPartners",
+                "responses": {
+                    "200": {
+                    "description": "Successful operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ListOfProjectsAndPartnersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Partners or projects not found"
+                    }
+                }
+            }
+        }
     },
     "components": {
         "schemas": {
-        
+            "ListOfProjectsAndPartnersResponse": {
+                "type": "object",
+                "properties": {
+                    "projects": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "Backend-generated unique identifier",
+                                    "example": "GGHJlhkj668__hjkhjkhh$%"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "The short text describing specific project)",
+                                    "example": "Ми - 57 бригада та беремо участь у найзапекліших боях...."
+                                },
+                                "imageURL": {
+                                    "type": "string",
+                                    "description": "Link on project image",
+                                    "example": "https://dokoopy.onrender.com/projects/1.jpg"
+                                }
+                            }
+                        },
+                    "description": "List of projects found by request"
+                    },
+                    "partners": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "Backend-generated unique identifier",
+                                    "example": "GGHJlhkj668__hjkhjkhh$%"
+                                },
+                                "imageURL": {
+                                    "type": "string",
+                                    "description": "Link on partner image",
+                                    "example": "https://dokoopy.onrender.com/partners/5.jpg"
+                                }
+                            }
+                        },
+                    "description": "List of partners found by request"
+                    }
+                }
+            }
+        }
+    },
+    "securitySchemes": {
+        "Bearer": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
         }
     }
 }
