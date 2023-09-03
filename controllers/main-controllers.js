@@ -26,7 +26,6 @@ const getAllProjectsAndPartners = async(req, res) => {
         partners,
     });
 }
-//test
 
 module.exports = {
     getAllProjectsAndPartners: controllerWrapper(getAllProjectsAndPartners),

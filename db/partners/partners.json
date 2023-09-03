@@ -1,22 +1,18 @@
 [
     {
         "id": "AeHIrLTr6JkxGE6SN-0Rw",
-        "description": "Partner 1",
         "imageURL": "/partners/5.jpg"
     },
     {
         "id": "drsAJ4SHPYqZeG-83QTVW",
-        "description": "Partner 2",
         "imageURL": "/partners/6.jpg"
     },
     {
         "id": "vza2RIzNGIwutCVCs4mCL",
-        "description": "Partner 3",
         "imageURL": "/partners/7.jpg"
     },
     {
         "id": "05olLMgyVQdWRwgKfg5J6",
-        "description": "Partner 4",
         "imageURL": "/partners/8.jpg"
     }
 ]
