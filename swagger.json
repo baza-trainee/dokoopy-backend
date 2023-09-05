@@ -73,10 +73,12 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "mail@mail.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "MySuperSecretPassword"
                   }
                 },
                 "required": ["username", "password"]
@@ -112,7 +114,8 @@
             "in": "header",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
             },
             "description": "Active token"
           }
@@ -143,7 +146,8 @@
             "in": "header",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
             },
             "description": "Active token"
           }
@@ -226,7 +230,8 @@
         "properties": {
           "token": {
             "type": "string",
-            "description": "New token to unlock private routes in administration panel"
+            "description": "New token to unlock private routes in administration panel",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
           }
         }
       },
@@ -235,7 +240,8 @@
         "properties": {
           "email": {
             "type": "string",
-            "description": "Email of active user"
+            "description": "Email of active user",
+            "example": "mail@mail.com"
           }
         }
       }
