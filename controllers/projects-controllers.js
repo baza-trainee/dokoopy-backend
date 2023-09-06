@@ -1,4 +1,5 @@
 const fs = require('fs/promises');
+require("dotenv").config();
 const { nanoid } = require('nanoid');
 const path = require('path');
 const HttpError = require("../utils/HttpError");
@@ -60,8 +61,6 @@ const deleteProject = async(req, res) => {
 const updateProject = async(req, res) => {
     const projects_data = await fs.readFile(projectsPath, 'utf-8');
     const projects = JSON.parse(projects_data);
-    const date = new Date();
-    console.log(req.body);
 
     const index = projects.findIndex(project => project.id === req.params.id);
     if (index === -1) {
@@ -83,7 +82,7 @@ const updateProject = async(req, res) => {
         title: req.body.title,
         description: req.body.description,
         imageURL,
-        date,
+        date: req.body.date,
     }
 
     console.log(updProject);
