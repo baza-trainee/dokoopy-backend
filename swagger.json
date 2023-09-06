@@ -97,7 +97,7 @@
               }
             }
           },
-          "404": {
+          "400": {
             "description": "Wrong email or password"
           }
         }
@@ -135,7 +135,7 @@
         ]
       }
     },
-    "/getCurrentUser": {
+    "/current": {
       "get": {
         "summary": "Check the active user",
         "tags": ["Auth"],
