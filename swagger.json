@@ -1,128 +1,257 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-        "title": "Dokoopy 1.0.0",
-        "description": "API for charity landing page of 57th brigade.\n\nThis Server based on the OpenAPI 3.0 specification\n\nSome useful links:\n- [The Dokoopy-backend repository](https://github.com/baza-trainee/dokoopy-backend)",
-        "contact": {
-            "name": "API developers",
-            "email": ""
-        },
-        "version": "1.0.0"
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Dokoopy 1.0.0",
+    "description": "API for charity landing page of 57th brigade.\n\nThis Server based on the OpenAPI 3.0 specification\n\nSome useful links:\n- [The Dokoopy-backend repository](https://github.com/baza-trainee/dokoopy-backend)",
+    "contact": {
+      "name": "API developers",
+      "email": ""
     },
-    "servers": [
-        {
-            "url": "http://localhost:5001/api",
-            "description": "Development Server"
-        },
-        {
-            "url": "https://dokoopy.onrender.com/api",
-            "description": "Production Server"
-        },
-        {
-            "url": "https://dokoopy-pr-{PR_number}.onrender.com/api",
-            "description": "Test Server for current Pull Request"
-        }
-    ],
-    "consumes": [
-        "application/json",
-        "multipart/form-data",
-        "text/html"
-    ],
-    "produces": [
-        "application/json",
-        "multipart/form-data",
-        "text/html"
-    ],
-    "tags": [
-        {
-            "name": "Main",
-            "description": "Main page"
-        }
-    ],
-    "paths": {
-        "/main": {
-            "get": {
-                "summary": "Get all partners and projects",
-                "tags": [
-                    "Main"
-                ],
-                "description": "Returns all partners and projects from the DB",
-                "operationId": "getAllProjectsAndPartners",
-                "responses": {
-                    "200": {
-                    "description": "Successful operation",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ListOfProjectsAndPartnersResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Partners or projects not found"
-                    }
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001/api",
+      "description": "Development Server"
+    },
+    {
+      "url": "https://dokoopy.onrender.com/api",
+      "description": "Production Server"
+    },
+    {
+      "url": "https://dokoopy-pr-{PR_number}.onrender.com/api",
+      "description": "Test Server for current Pull Request"
+    }
+  ],
+  "consumes": ["application/json", "multipart/form-data", "text/html"],
+  "produces": ["application/json", "multipart/form-data", "text/html"],
+  "tags": [
+    {
+      "name": "Main",
+      "description": "Main page"
+    },
+    {
+      "name": "Auth",
+      "description": "Administration panel"
+    }
+  ],
+  "paths": {
+    "/main": {
+      "get": {
+        "summary": "Get all partners and projects",
+        "tags": ["Main"],
+        "description": "Returns all partners and projects from the DB",
+        "operationId": "getAllProjectsAndPartners",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfProjectsAndPartnersResponse"
                 }
+              }
             }
+          },
+          "404": {
+            "description": "Partners or projects not found"
+          }
         }
+      }
     },
-    "components": {
-        "schemas": {
-            "ListOfProjectsAndPartnersResponse": {
+    "/login": {
+      "post": {
+        "summary": "Login admin user to Administration panel",
+        "tags": ["Auth"],
+        "description": "Returns new token with expiration time - 1 hour",
+        "operationId": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
                 "type": "object",
                 "properties": {
-                    "projects": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string",
-                                    "description": "Backend-generated unique identifier",
-                                    "example": "GGHJlhkj668__hjkhjkhh$%"
-                                },
-                                "description": {
-                                    "type": "string",
-                                    "description": "The short text describing specific project)",
-                                    "example": "Ми - 57 бригада та беремо участь у найзапекліших боях...."
-                                },
-                                "imageURL": {
-                                    "type": "string",
-                                    "description": "Link on project image",
-                                    "example": "https://dokoopy.onrender.com/projects/1.jpg"
-                                }
-                            }
-                        },
-                    "description": "List of projects found by request"
-                    },
-                    "partners": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string",
-                                    "description": "Backend-generated unique identifier",
-                                    "example": "GGHJlhkj668__hjkhjkhh$%"
-                                },
-                                "imageURL": {
-                                    "type": "string",
-                                    "description": "Link on partner image",
-                                    "example": "https://dokoopy.onrender.com/partners/5.jpg"
-                                }
-                            }
-                        },
-                    "description": "List of partners found by request"
-                    }
-                }
+                  "email": {
+                    "type": "string",
+                    "example": "mail@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "MySuperSecretPassword"
+                  }
+                },
+                "required": ["username", "password"]
+              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully token signed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/login"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Wrong email or password"
+          }
         }
+      }
     },
-    "securitySchemes": {
-        "Bearer": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT"
-        }
+    "/logout": {
+      "get": {
+        "summary": "Logout user",
+        "tags": ["Auth"],
+        "description": "Removes active token from server. You need to add token in headers of request",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+            },
+            "description": "Active token"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Token deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/current": {
+      "get": {
+        "summary": "Check the active user",
+        "tags": ["Auth"],
+        "description": "Returns email of active user. You need to add token in headers of request.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+            },
+            "description": "Active token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCurrentUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "ListOfProjectsAndPartnersResponse": {
+        "type": "object",
+        "properties": {
+          "projects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The short text describing specific project)",
+                  "example": "Ми - 57 бригада та беремо участь у найзапекліших боях...."
+                },
+                "imageURL": {
+                  "type": "string",
+                  "description": "Link on project image",
+                  "example": "https://dokoopy.onrender.com/projects/1.jpg"
+                }
+              }
+            },
+            "description": "List of projects found by request"
+          },
+          "partners": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "description": "Link on partner image",
+                  "example": "https://dokoopy.onrender.com/partners/5.jpg"
+                }
+              }
+            },
+            "description": "List of partners found by request"
+          }
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "New token to unlock private routes in administration panel",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+          }
+        }
+      },
+      "getCurrentUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email of active user",
+            "example": "mail@mail.com"
+          }
+        }
+      }
+    }
+  },
+  "securitySchemes": {
+    "Bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
 }
