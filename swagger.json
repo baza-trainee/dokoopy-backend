@@ -227,9 +227,6 @@
                   },
                   "401": {
                     "description": "Not authorized"
-                  },
-                  "409": {
-                    "description": "Email already in use"
                   }
                 }
             }
