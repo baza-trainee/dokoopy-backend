@@ -1,22 +1,37 @@
 [
-    {
-        "id": "dfkjdgjhjhggghh",
-        "description": "Project 1",
-        "imageURL": "/projects/1.jpg"
-    },
-    {
-        "id": "1234345",
-        "description": "Project 2",
-        "imageURL": "/projects/2.jpg"
-    },
-    {
-        "id": "dfsgdfghhgh",
-        "description": "Project 3",
-        "imageURL": "/projects/3.jpg"
-    },
-    {
-        "id": "dsfdgfhgfhfhg",
-        "description": "Project 4",
-        "imageURL": "/projects/4.jpg"
-    }
+  {
+    "id": "xalETqVCuwEohrMEMIzH8",
+    "title": "Test Project 3",
+    "description": "The third test project",
+    "imageURL": "projects\\EYjyUR7_1JKnFCcLastU__IMG_7856.JPG",
+    "date": "2023-09-06T12:34:37.299Z"
+  },
+  {
+    "id": "L7WhqgrBrIIUQNYLiviAo",
+    "title": "Test Project 1",
+    "description": "The first test project",
+    "imageURL": "projects\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG",
+    "date": "2023-09-06T13:06:19.775Z"
+  },
+  {
+    "id": "GOzp-r2HA9jzV_xQ71lDW",
+    "title": "Test Project 2",
+    "description": "The second test project",
+    "imageURL": "projects\\Dlyvt7b1ds8rz3fF0i22T_IMG_7856.JPG",
+    "date": "2023-09-06T13:07:54.397Z"
+  },
+  {
+    "id": "OE_PT5QT9jwly5swIg5qo",
+    "title": "Test Project 4",
+    "description": "The fourth test project",
+    "imageURL": "projects\\kjISzgvG5s808YvlUNVe9_IMG_7827.JPG",
+    "date": "2023-09-06T13:08:21.748Z"
+  },
+  {
+    "id": "gfBDYYwkGbeSw5yiCUOWf",
+    "title": "Updated project 5",
+    "description": "The updated fifth project",
+    "imageURL": "projects\\dkMevFyp8HrEWTmXF3BqV_IMG_7842.JPG",
+    "date": "2023-09-06T13:36:57.545Z"
+  }
 ]

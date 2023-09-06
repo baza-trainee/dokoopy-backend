@@ -25,6 +25,8 @@ const getAllProjectsAndPartners = async(req, res) => {
         projects,
         partners,
     });
+
+    return {projects, partners};
 }
 
 module.exports = {
