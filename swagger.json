@@ -19,8 +19,8 @@
             "description": "Production Server"
         },
         {
-            "url": "https://dokoopy-pr-{PR_number}.onrender.com/api",
-            "description": "Test Server for current Pull Request"
+            "url": "https://dokoopy-pr-11.onrender.com/api",
+            "description": "Test Server for 11 Pull Request"
         }
     ],
     "consumes": [
@@ -37,6 +37,14 @@
         {
             "name": "Main",
             "description": "Main page"
+        },
+        {
+            "name": "Auth",
+            "description": "Administration panel"
+        },
+        {
+            "name": "Projects",
+            "description": "Projects block"
         }
     ],
     "paths": {
@@ -62,6 +70,252 @@
                     "404": {
                         "description": "Partners or projects not found"
                     }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+              "summary": "Login admin user to Administration panel",
+              "tags": ["Auth"],
+              "description": "Returns new token with expiration time - 1 hour",
+              "operationId": "login",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "example": "mail@mail.com"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "MySuperSecretPassword"
+                        }
+                      },
+                      "required": ["username", "password"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successfully token signed",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/login"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Wrong email or password"
+                }
+              }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+              "summary": "Logout user",
+              "tags": ["Auth"],
+              "description": "Removes active token from server. You need to add token in headers of request",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+                  },
+                  "description": "Active token"
+                }
+              ],
+              "responses": {
+                "204": {
+                  "description": "Token deleted"
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              },
+              "security": [
+                {
+                  "Bearer": []
+                }
+              ]
+            }
+        },
+        "/auth/current": {
+            "get": {
+              "summary": "Check the active user",
+              "tags": ["Auth"],
+              "description": "Returns email of active user. You need to add token in headers of request.",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+                  },
+                  "description": "Active token"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful operation",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/getCurrentUser"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized"
+                }
+              },
+              "security": [
+                {
+                  "Bearer": []
+                }
+              ]
+            }
+        },
+        "/projects": {
+            "post": {
+                "summary": "Add new project",
+                "tags": [
+                  "Projects"
+                ],
+                "security": [
+                  {
+                    "Bearer": []
+                  }
+                ],
+                "description": "Add new project",
+                "operationId": "addProject",
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "multipart/form-data": {
+                      "schema": {
+                        "$ref": "#/components/schemas/AddProjectRequest"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "201": {
+                    "description": "success",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/AddProjectResponse"
+                        }
+                      }
+                    }
+                  },
+                  "400": {
+                    "description": "Bad request"
+                  },
+                  "401": {
+                    "description": "Not authorized"
+                  },
+                  "409": {
+                    "description": "Email already in use"
+                  }
+                }
+            }
+        },
+        "/projects/{id}": {
+            "put": {
+              "summary": "Update project info",
+              "tags": [
+                "Projects"
+              ],
+              "security": [
+                {
+                  "Bearer": []
+                }
+              ],
+              "description": "Update project information in the database",
+              "operationId": "updateProject",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "example": "6490564f8f85c705511c5de2",
+                  "schema": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "multipart/form-data": {
+                    "schema": {
+                      "$ref": "#/components/schemas/UpdateProjectRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful operation",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/AddProjectResponse"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Not authorized"
+                }
+              }
+            },
+            "delete": {
+                "tags": [
+                  "Projects"
+                ],
+                "security": [
+                  {
+                    "Bearer": []
+                  }
+                ],
+                "summary": "Delete the project",
+                "description": "Delete the project from the database",
+                "operationId": "deleteProject",
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID of project that needs to be deleted",
+                    "required": true,
+                    "schema": {
+                      "type": "string",
+                      "description": "Delete the project with the specified ID"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Project deleted"
+                  },
+                  "401": {
+                    "description": "Not authorized"
+                  }
                 }
             }
         }
@@ -115,14 +369,113 @@
                     "description": "List of partners found by request"
                     }
                 }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "New token to unlock private routes in administration panel",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTM5Mjc5ODgsImV4cCI6MTY5MzkzMTU4OH0.E6QuahI22Yo_fOMvSieL2lWY3ePHQtxyP0ZBghK2-ac"
+                  }
+                }
+            },
+            "getCurrentUser": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Email of active user",
+                    "example": "mail@mail.com"
+                  }
+                }
+            },
+            "AddProjectRequest": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "description",
+                    "imageURL"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Project 1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is the first project"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "AddProjectResponse": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "GGHJlhkj668__hjkhjkhh$%"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Project title",
+                    "example": "Project 1"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Project description",
+                    "example": "This is the first project"
+                  },
+                  "imageURL": {
+                      "type": "string",
+                      "description": "Project image url",
+                      "example": "projects\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "the creation time of project (backend-generated)",
+                    "example": "2023-05-15T10:51:30.531Z"
+                  }
+                }
+            },
+            "UpdateProjectRequest": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "description",
+                    "imageURL",
+                    "date"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Project 1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is the first project"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "06.09.2023"
+                    }
+                }
             }
-        }
-    },
-    "securitySchemes": {
-        "Bearer": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT"
+        },
+        "securitySchemes": {
+            "Bearer": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+            }
         }
     }
 }
