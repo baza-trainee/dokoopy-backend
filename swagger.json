@@ -222,9 +222,6 @@
                       }
                     }
                   },
-                  "400": {
-                    "description": "Bad request"
-                  },
                   "401": {
                     "description": "Not authorized"
                   }
