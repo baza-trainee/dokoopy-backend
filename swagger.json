@@ -37,6 +37,10 @@
     {
       "name": "Projects",
       "description": "Projects block"
+    },
+    {
+      "name": "Reports",
+      "description": "Reports block"
     }
   ],
   "paths": {
@@ -385,6 +389,98 @@
             }
           }
       }
+    },
+    "/reports": {
+      "post": {
+        "summary": "Add new report",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Add new report",
+        "operationId": "addReport",
+        "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReportRequest"
+                }
+              }
+            }
+        },
+        "responses": {
+          "201": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AddReportResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/reports/{id}": {
+      "put": {
+        "summary": "Update report",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update report in the database",
+        "operationId": "updateReport",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "example": "6490564f8f85c705511c5de2",
+            "schema": {
+              "type": "string",
+              "description": "Backend-generated unique identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReportResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -561,6 +657,45 @@
                         "example": "06.09.2023"
                     }
                 }
+      },
+      "AddReportRequest": {
+        "type": "object",
+        "required": [
+          "reportURL"
+        ],
+        "properties": {
+          "reportURL": {
+              "type": "string",
+              "format": "binary"
+          }
+        }
+      },
+      "AddReportResponse": {
+          "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Backend-generated unique identifier",
+                "example": "GGHJlhkj668__hjkhjkhh$%"
+              },
+              "reportURL": {
+                "type": "string",
+                "description": "Report link",
+                "example": "reports\\eYLKBYxgM-MVDo31zUgnz_test.pdf"
+              }
+          }
+      },
+      "UpdateReportRequest": {
+        "type": "object",
+        "required": [
+          "reportURL"
+        ],
+        "properties": {
+          "reportURL": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
       }
     },
     "securitySchemes": {
