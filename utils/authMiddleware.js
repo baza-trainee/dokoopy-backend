@@ -6,12 +6,12 @@ const HttpError = require("./HttpError");
 const userPath = path.join(__dirname, "../db/users/users.json");
 
 const authMiddleware = async (req, res, next) => {
-  const [tokenType, token] = req.headers["authorization"].split(" ");
 
-  if (!token) {
-    next(HttpError.UnauthorizedError("Not authorized"));
-  }
-
+  const { authorization = "" } = req.headers;
+    const [ bearer, token ] = authorization.split(" ");
+    if(bearer !== "Bearer") {
+        next(new HttpError(401, "Not authorized"))
+    }
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       const usersData = await fs.readFile(userPath, "utf-8");

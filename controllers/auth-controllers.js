@@ -126,6 +126,3 @@ module.exports = {
   resetPassword: controllerWrapper(resetPassword),
 };
 
-
-  //"email": "estasjuk@gmail.com",
-  //"password": "qwe123"

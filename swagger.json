@@ -33,6 +33,10 @@
     {
       "name": "Auth",
       "description": "Administration panel"
+    },
+    {
+      "name": "Projects",
+      "description": "Projects block"
     }
   ],
   "paths": {
@@ -56,7 +60,132 @@
           "404": {
             "description": "Partners or projects not found"
           }
-        }
+        },
+      "/projects": {
+           "post": {
+                "summary": "Add new project",
+                "tags": [
+                  "Projects"
+                ],
+                "security": [
+                  {
+                    "Bearer": []
+                  }
+                ],
+                "description": "Add new project",
+                "operationId": "addProject",
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "multipart/form-data": {
+                      "schema": {
+                        "$ref": "#/components/schemas/AddProjectRequest"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "201": {
+                    "description": "success",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/AddProjectResponse"
+                        }
+                      }
+                    }
+                  },
+                  "401": {
+                    "description": "Not authorized"
+                  }
+                }
+            }
+        },
+        "/projects/{id}": {
+            "put": {
+              "summary": "Update project info",
+              "tags": [
+                "Projects"
+              ],
+              "security": [
+                {
+                  "Bearer": []
+                }
+              ],
+              "description": "Update project information in the database",
+              "operationId": "updateProject",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "example": "6490564f8f85c705511c5de2",
+                  "schema": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "multipart/form-data": {
+                    "schema": {
+                      "$ref": "#/components/schemas/UpdateProjectRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful operation",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/AddProjectResponse"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Not authorized"
+                }
+              }
+            },
+            "delete": {
+                "tags": [
+                  "Projects"
+                ],
+                "security": [
+                  {
+                    "Bearer": []
+                  }
+                ],
+                "summary": "Delete the project",
+                "description": "Delete the project from the database",
+                "operationId": "deleteProject",
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID of project that needs to be deleted",
+                    "required": true,
+                    "schema": {
+                      "type": "string",
+                      "description": "Delete the project with the specified ID"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Project deleted"
+                  },
+                  "401": {
+                    "description": "Not authorized"
+                  }
+                }
+              }
+          }
       }
     },
     "/login": {
@@ -354,7 +483,87 @@
           }
         }
       }
-    }
+    },
+      "AddProjectRequest": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "description",
+                    "imageURL"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Project 1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is the first project"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "AddProjectResponse": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "GGHJlhkj668__hjkhjkhh$%"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Project title",
+                    "example": "Project 1"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Project description",
+                    "example": "This is the first project"
+                  },
+                  "imageURL": {
+                      "type": "string",
+                      "description": "Project image url",
+                      "example": "projects\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "the creation time of project (backend-generated)",
+                    "example": "2023-05-15T10:51:30.531Z"
+                  }
+                }
+            },
+            "UpdateProjectRequest": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "description",
+                    "imageURL",
+                    "date"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Project 1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is the first project"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "06.09.2023"
+                    }
+                }
+            }
+        }
   },
   "securitySchemes": {
     "Bearer": {
