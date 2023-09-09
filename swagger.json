@@ -563,8 +563,7 @@
                     }
                 }
             }
-        }
-  },
+        },
   "securitySchemes": {
     "Bearer": {
       "type": "http",
@@ -573,3 +572,4 @@
     }
   }
 }
+
