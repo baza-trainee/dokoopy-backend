@@ -626,6 +626,23 @@
                         "example": "06.09.2023"
                     }
                 }
+      },
+      "UpdateContactResponse": {
+        "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "Backend-generated unique id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Telegram"
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "@dokoopy"
+                    }
+                }
       }
     },
     "securitySchemes": {
