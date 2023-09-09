@@ -12,7 +12,6 @@ const authMiddleware = async (req, res, next) => {
     if(bearer !== "Bearer") {
         next(new HttpError(401, "Not authorized"))
     }
-
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       const usersData = await fs.readFile(userPath, "utf-8");
