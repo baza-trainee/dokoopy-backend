@@ -60,135 +60,10 @@
           "404": {
             "description": "Partners or projects not found"
           }
-        },
-      "/projects": {
-           "post": {
-                "summary": "Add new project",
-                "tags": [
-                  "Projects"
-                ],
-                "security": [
-                  {
-                    "Bearer": []
-                  }
-                ],
-                "description": "Add new project",
-                "operationId": "addProject",
-                "requestBody": {
-                  "required": true,
-                  "content": {
-                    "multipart/form-data": {
-                      "schema": {
-                        "$ref": "#/components/schemas/AddProjectRequest"
-                      }
-                    }
-                  }
-                },
-                "responses": {
-                  "201": {
-                    "description": "success",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/AddProjectResponse"
-                        }
-                      }
-                    }
-                  },
-                  "401": {
-                    "description": "Not authorized"
-                  }
-                }
-            }
-        },
-        "/projects/{id}": {
-            "put": {
-              "summary": "Update project info",
-              "tags": [
-                "Projects"
-              ],
-              "security": [
-                {
-                  "Bearer": []
-                }
-              ],
-              "description": "Update project information in the database",
-              "operationId": "updateProject",
-              "parameters": [
-                {
-                  "name": "id",
-                  "in": "path",
-                  "required": true,
-                  "example": "6490564f8f85c705511c5de2",
-                  "schema": {
-                    "type": "string",
-                    "description": "Backend-generated unique identifier"
-                  }
-                }
-              ],
-              "requestBody": {
-                "required": true,
-                "content": {
-                  "multipart/form-data": {
-                    "schema": {
-                      "$ref": "#/components/schemas/UpdateProjectRequest"
-                    }
-                  }
-                }
-              },
-              "responses": {
-                "200": {
-                  "description": "Successful operation",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/AddProjectResponse"
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Not authorized"
-                }
-              }
-            },
-            "delete": {
-                "tags": [
-                  "Projects"
-                ],
-                "security": [
-                  {
-                    "Bearer": []
-                  }
-                ],
-                "summary": "Delete the project",
-                "description": "Delete the project from the database",
-                "operationId": "deleteProject",
-                "parameters": [
-                  {
-                    "name": "id",
-                    "in": "path",
-                    "description": "ID of project that needs to be deleted",
-                    "required": true,
-                    "schema": {
-                      "type": "string",
-                      "description": "Delete the project with the specified ID"
-                    }
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "Project deleted"
-                  },
-                  "401": {
-                    "description": "Not authorized"
-                  }
-                }
-              }
-          }
+        }
       }
     },
-    "/login": {
+    "/auth/login": {
       "post": {
         "summary": "Login admin user to Administration panel",
         "tags": ["Auth"],
@@ -232,7 +107,7 @@
         }
       }
     },
-    "/logout": {
+    "/auth/logout": {
       "get": {
         "summary": "Logout user",
         "tags": ["Auth"],
@@ -264,7 +139,7 @@
         ]
       }
     },
-    "/current": {
+    "/auth/current": {
       "get": {
         "summary": "Check the active user",
         "tags": ["Auth"],
@@ -384,6 +259,131 @@
             "description": "Reset token is expired"
           }
         }
+      }
+    },
+    "/projects": {
+      "post": {
+        "summary": "Add new project",
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Add new project",
+        "operationId": "addProject",
+        "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddProjectRequest"
+                }
+              }
+            }
+        },
+        "responses": {
+          "201": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AddProjectResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "put": {
+        "summary": "Update project info",
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update project information in the database",
+        "operationId": "updateProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "example": "6490564f8f85c705511c5de2",
+            "schema": {
+              "type": "string",
+              "description": "Backend-generated unique identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddProjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      },
+      "delete": {
+          "tags": [
+            "Projects"
+          ],
+          "security": [
+            {
+              "Bearer": []
+            }
+          ],
+          "summary": "Delete the project",
+          "description": "Delete the project from the database",
+          "operationId": "deleteProject",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of project that needs to be deleted",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "description": "Delete the project with the specified ID"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Project deleted"
+            },
+            "401": {
+              "description": "Not authorized"
+            }
+          }
       }
     }
   },
