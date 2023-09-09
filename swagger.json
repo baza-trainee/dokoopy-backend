@@ -173,6 +173,89 @@
           }
         ]
       }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "summary": "Send forgot-password email to the user",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Send the email with link for resetting password",
+        "operationId": "forgotPassword",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "String",
+                  "example": "Reset password email sent"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/auth/reset-password/{resetToken}": {
+      "post": {
+        "summary": "Reset password",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Write new password to the Database",
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "resetToken",
+            "in": "params",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Backend-generated unique resetToken"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "String",
+                  "example": "Reset password is succesful"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Reset token is expired"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -242,6 +325,32 @@
             "type": "string",
             "description": "Email of active user",
             "example": "mail@mail.com"
+          }
+        }
+      },
+      "ForgotPasswordRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "user email",
+            "example": "user@gmail.com"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "required": [
+          "password"
+        ],
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "new password",
+            "example": "fhdjhfjshh_123"
           }
         }
       }
