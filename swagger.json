@@ -37,6 +37,10 @@
     {
       "name": "Projects",
       "description": "Projects block"
+    },
+    {
+      "name": "Contacts",
+      "description": "Contacts block"
     }
   ],
   "paths": {
