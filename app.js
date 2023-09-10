@@ -9,6 +9,7 @@ const swaggerDocument = require("./swagger.json");
 const mainRouter = require("./routes/api/main/main-routes");
 const authRouter = require("./routes/api/auth/auth-routes");
 const projectsRouter = require("./routes/api/projects/projects-routes");
+const heroRouter = require("./routes/api/hero/hero-routes");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/main", mainRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
+app.use("/api/hero", heroRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
