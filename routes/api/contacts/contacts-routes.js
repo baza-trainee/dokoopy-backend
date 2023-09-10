@@ -6,6 +6,6 @@ const { authMiddleware } = require('../../../utils/authMiddleware');
 
 const router = express.Router();
 
-router.put('/:id', authMiddleware, updateContact);
+router.put('/', authMiddleware, updateContact);
 
 module.exports = router;

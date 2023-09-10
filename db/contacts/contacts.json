@@ -1,12 +1,4 @@
-[
-  {
-    "id": "email",
-    "name": "Email",
-    "data": "dokoopy@gmail.com"
-  },
-  {
-    "id": "telegram",
-    "name": "Telegram",
-    "data": "@dokoopy//test"
-  }
-]
+{
+  "email": "email3",
+  "data": "test3"
+}

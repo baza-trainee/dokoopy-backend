@@ -390,7 +390,7 @@
           }
       }
     },
-    "/contacts/{id}": {
+    "/contacts": {
       "put": {
         "summary": "Update contacts info",
         "tags": [
@@ -403,17 +403,6 @@
         ],
         "description": "Update contacts info in the database",
         "operationId": "updateContact",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "example": "telegram",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -421,11 +410,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "email": {
                     "type": "string",
-                    "example": "Telegram"
+                    "example": "dokoopy@gmail.com"
                   },
-                  "data": {
+                  "telegram": {
                     "type": "string",
                     "example": "@dokoopy"
                   }
@@ -630,15 +619,11 @@
       "UpdateContactResponse": {
         "type": "object",
                 "properties": {
-                    "id": {
+                    "email": {
                         "type": "string",
-                        "example": "Backend-generated unique id"
+                        "example": "dokoopy@gmail.com"
                     },
-                    "name": {
-                        "type": "string",
-                        "example": "Telegram"
-                    },
-                    "data": {
+                    "telegram": {
                       "type": "string",
                       "example": "@dokoopy"
                     }
