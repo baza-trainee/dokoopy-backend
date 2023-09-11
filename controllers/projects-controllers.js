@@ -85,8 +85,6 @@ const updateProject = async(req, res) => {
         date: req.body.date,
     }
 
-    console.log(updProject);
-
     projects.splice(index, 1, updProject);
     await fs.writeFile(projectsPath, JSON.stringify(projects, null, 2));
 
