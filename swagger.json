@@ -390,7 +390,7 @@
           }
       }
     },
-    "/bank/{id}": {
+    "/bank": {
       "put": {
         "summary": "Update jar link",
         "tags": [
@@ -403,18 +403,6 @@
         ],
         "description": "Update jar link in the database",
         "operationId": "updateBank",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "example": "6490564f8f85c705511c5de2",
-            "schema": {
-              "type": "string",
-              "description": "Backend-generated unique identifier"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -627,10 +615,6 @@
       "UpdateBankLinkResponse": {
         "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "Backend-generated unique id"
-                    },
                     "link": {
                         "type": "string",
                         "example": "monobank_link"
