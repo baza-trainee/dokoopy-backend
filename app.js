@@ -9,6 +9,7 @@ const swaggerDocument = require("./swagger.json");
 const mainRouter = require("./routes/api/main/main-routes");
 const authRouter = require("./routes/api/auth/auth-routes");
 const projectsRouter = require("./routes/api/projects/projects-routes");
+const reportsRouter = require("./routes/api/reports/reports-routes")
 const contactsRouter = require("./routes/api/contacts/contacts-routes")
 const partnersRouter = require("./routes/api/partners/partners-routes");
 
@@ -35,6 +36,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/main", mainRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
+app.use("/api/reports", reportsRouter);
 app.use("/api/contacts", contactsRouter);
 app.use("/api/partners", partnersRouter);
 
