@@ -41,6 +41,14 @@
     {
       "name": "Reports",
       "description": "Reports block"
+    },
+    {
+      "name": "Contacts",
+      "description": "Contacts block"
+    },
+    {
+      "name": "Partners",
+      "description": "Partners block"
     }
   ],
   "paths": {
@@ -390,6 +398,181 @@
           }
       }
     },
+    "/partners": {
+      "post": {
+        "summary": "Add new partner",
+        "tags": [
+          "Partners"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Add new partner",
+        "operationId": "addPartner",
+        "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPartnerRequest"
+                }
+              }
+            }
+        },
+        "responses": {
+          "201": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AddPartnerResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/partners/{id}": {
+      "put": {
+        "summary": "Update partner info",
+        "tags": [
+          "Partners"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update partner information in the database",
+        "operationId": "updatePartner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "example": "6490564f8f85c705511c5de2",
+            "schema": {
+              "type": "string",
+              "description": "Backend-generated unique identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePartnerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPartnerResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      },
+      "delete": {
+          "tags": [
+            "Partners"
+          ],
+          "security": [
+            {
+              "Bearer": []
+            }
+          ],
+          "summary": "Delete the partner",
+          "description": "Delete the partner from the database",
+          "operationId": "deletePartner",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of partner that needs to be deleted",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "description": "Delete the partner with the specified ID"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Partner deleted"
+            },
+            "401": {
+              "description": "Not authorized"
+            }
+          }
+      }
+    },
+    "/contacts": {
+      "put": {
+        "summary": "Update contacts info",
+        "tags": [
+          "Contacts"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update contacts info in the database",
+        "operationId": "updateContact",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "dokoopy@gmail.com"
+                  },
+                  "telegram": {
+                    "type": "string",
+                    "example": "@dokoopy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateContactResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
     "/reports": {
       "post": {
         "summary": "Add new report",
@@ -655,6 +838,98 @@
                     "date": {
                         "type": "string",
                         "example": "06.09.2023"
+                    }
+                }
+      },
+      "AddPartnerRequest": {
+        "type": "object",
+        "required": [
+          "title",
+          "link",
+          "imageURL"
+        ],
+        "properties": {
+          "title": {
+              "type": "string",
+              "example": "Partner 1"
+          },
+            "link": {
+              "type": "string",
+              "example": "https://olx.ua"
+          },
+            "imageURL": {
+              "type": "string",
+              "format": "binary"
+          }
+        }
+      },
+      "AddPartnerResponse": {
+          "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Backend-generated unique identifier",
+                "example": "GGHJlhkj668__hjkhjkhh$%"
+              },
+              "title": {
+                "type": "string",
+                "description": "Partner title",
+                "example": "Partner 1"
+              },
+              "link": {
+                "type": "string",
+                "description": "Partner link",
+                "example": "https://olx.ua"
+              },
+              "imageURL": {
+                  "type": "string",
+                  "description": "Partner image url",
+                  "example": "partners\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
+              },
+              "date": {
+                "type": "string",
+                "description": "the creation time of partner (backend-generated)",
+                "example": "2023-05-15T10:51:30.531Z"
+              }
+          }
+      },
+      "UpdatePartnerRequest": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "link",
+                    "imageURL",
+                    "date"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Partner 1"
+                    },
+                    "link": {
+                        "type": "string",
+                        "example": "https://olx.ua"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "06.09.2023"
+                    }
+             }
+      },
+      "UpdateContactResponse": {
+        "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "dokoopy@gmail.com"
+                    },
+                    "telegram": {
+                      "type": "string",
+                      "example": "@dokoopy"
                     }
                 }
       },
