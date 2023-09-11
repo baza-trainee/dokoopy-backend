@@ -39,6 +39,10 @@
       "description": "Projects block"
     },
     {
+      "name": "Contacts",
+      "description": "Contacts block"
+    },
+    {
       "name": "Partners",
       "description": "Partners block"
     }
@@ -514,6 +518,56 @@
             }
           }
       }
+    },
+    "/contacts": {
+      "put": {
+        "summary": "Update contacts info",
+        "tags": [
+          "Contacts"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update contacts info in the database",
+        "operationId": "updateContact",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "dokoopy@gmail.com"
+                  },
+                  "telegram": {
+                    "type": "string",
+                    "example": "@dokoopy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateContactResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -767,6 +821,19 @@
                     "date": {
                         "type": "string",
                         "example": "06.09.2023"
+                    }
+             }
+      },
+      "UpdateContactResponse": {
+        "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "dokoopy@gmail.com"
+                    },
+                    "telegram": {
+                      "type": "string",
+                      "example": "@dokoopy"
                     }
                 }
       }
