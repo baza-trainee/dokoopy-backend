@@ -1,9 +1,7 @@
 const fs = require('fs/promises');
 require("dotenv").config();
-const { nanoid } = require('nanoid');
 const path = require('path');
 const controllerWrapper = require("../utils/controllerWrapper");
-
 
 const bankPath = path.join(__dirname, '../db/bank/bank.json');
 
@@ -12,7 +10,6 @@ const updateBank = async(req, res) => {
     const bank = JSON.parse(bank_data);
 
     const updBank = {
-        id: req.params.id,
         link: req.body.link,
     }
 
