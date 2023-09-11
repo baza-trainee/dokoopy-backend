@@ -1,18 +1,16 @@
 [
-    {
-        "id": "AeHIrLTr6JkxGE6SN-0Rw",
-        "imageURL": "/partners/5.jpg"
-    },
-    {
-        "id": "drsAJ4SHPYqZeG-83QTVW",
-        "imageURL": "/partners/6.jpg"
-    },
-    {
-        "id": "vza2RIzNGIwutCVCs4mCL",
-        "imageURL": "/partners/7.jpg"
-    },
-    {
-        "id": "05olLMgyVQdWRwgKfg5J6",
-        "imageURL": "/partners/8.jpg"
-    }
+  {
+    "id": "lFrkX1v69RmfTsYIM1E678",
+    "title": "Baza Trainee",
+    "link": "https://baza-trainee.tech/ua",
+    "imageURL": "partners\\-kca7HrpSyTTNseY8R8bO_IMG_7799.JPG",
+    "date": "2023-09-08T19:30:34.342Z"
+  },
+  {
+    "id": "lNuO4Xun2Nwb7PSam-oKZ",
+    "title": "Партнер 1",
+    "link": "https://www.olx.ua/uk/",
+    "imageURL": "partners\\m_9kigWt-UoxL2fsygQzh_IMG_7856.JPG",
+    "date": "2023-09-09T15:18:14.486Z"
+  }
 ]
