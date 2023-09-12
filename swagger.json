@@ -19,8 +19,8 @@
       "description": "Production Server"
     },
     {
-      "url": "https://dokoopy-pr-{PR_number}.onrender.com/api",
-      "description": "Test Server for current Pull Request"
+      "url": "https://dokoopy-pr-19.onrender.com/api",
+      "description": "Test Server for feature get-main-content"
     }
   ],
   "consumes": ["application/json", "multipart/form-data", "text/html"],
