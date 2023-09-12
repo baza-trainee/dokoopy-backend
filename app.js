@@ -8,7 +8,7 @@ const swaggerDocument = require("./swagger.json");
 
 const mainRouter = require("./routes/api/main/main-routes");
 const authRouter = require("./routes/api/auth/auth-routes");
-const projectsRouter = require("./routes/api/projects/projects-routes");k
+const projectsRouter = require("./routes/api/projects/projects-routes");
 const bankRouter = require("./routes/api/bank/bank-routes");
 const heroRouter = require("./routes/api/hero/hero-routes");
 const reportsRouter = require("./routes/api/reports/reports-routes")
