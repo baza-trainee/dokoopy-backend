@@ -60,7 +60,7 @@
     }
   ],
   "paths": {
-    "/auth/login": {
+    "/auth/admin/login": {
       "post": {
         "summary": "Login admin user to Administration panel",
         "tags": ["Auth"],
@@ -104,7 +104,7 @@
         }
       }
     },
-    "/auth/logout": {
+    "/auth/admin/logout": {
       "get": {
         "summary": "Logout user",
         "tags": ["Auth"],
@@ -136,7 +136,7 @@
         ]
       }
     },
-    "/auth/current": {
+    "/auth/admin/current": {
       "get": {
         "summary": "Check the active user",
         "tags": ["Auth"],
@@ -175,7 +175,7 @@
         ]
       }
     },
-    "/auth/forgot-password": {
+    "/auth/admin/forgot-password": {
       "post": {
         "summary": "Send forgot-password email to the user",
         "tags": [
@@ -211,7 +211,7 @@
         }
       }
     },
-    "/auth/reset-password/{resetToken}": {
+    "/auth/admin/reset-password/{resetToken}": {
       "post": {
         "summary": "Reset password",
         "tags": [

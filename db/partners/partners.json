@@ -1,14 +1,20 @@
 [
   {
-    "id": "lFrkX1v69RmfTsYIM1E678",
-    "title": "Baza Trainee",
-    "link": "https://baza-trainee.tech/ua",
-    "imageURL": "partners\\-kca7HrpSyTTNseY8R8bO_IMG_7799.JPG"
+    "id": "AZi-RHWmAar2XmSDoSbMT",
+    "title": "Juniverse",
+    "link": "https://juniverse.com.ua/",
+    "imageURL": "partners\\Lc_fP4kcnbm9fcEs8g1AA_Juniverse_Logo.svg"
   },
   {
-    "id": "lNuO4Xun2Nwb7PSam-oKZ",
-    "title": "Партнер 1",
-    "link": "https://www.olx.ua/uk/",
-    "imageURL": "partners\\m_9kigWt-UoxL2fsygQzh_IMG_7856.JPG"
+    "id": "ZIoXDYBdewtxyBBsKDIG_",
+    "title": "Content Chameleon",
+    "link": "https://www.linkedin.com/company/content-chameleon-sales-agency/",
+    "imageURL": "partners\\bPX5R-wMyC3txO_GHPN70_Content_Chameleon_Logo.svg"
+  },
+  {
+    "id": "uFUX1pKVTGcCFJNHSEEr9",
+    "title": "Don't Panic",
+    "link": "https://dontpanic.team/",
+    "imageURL": "partners\\88ImXzGFSDhVEEww4UDAb_Don't_Panic_Logo.svg"
   }
 ]
