@@ -258,7 +258,7 @@
         }
       }
     },
-    "/projects": {
+    "/projects/admin": {
       "post": {
         "summary": "Add new project",
         "tags": [
@@ -296,9 +296,37 @@
               "description": "Not authorized"
           }
         }
+      },
+      "get": {
+        "summary": "Get all projects for the admin panel",
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get all project for the admin panel",
+        "operationId": "getAllProjects",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllProjectsResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
       }
     },
-    "/projects/{id}": {
+    "/projects/admin/{id}": {
       "put": {
         "summary": "Update project info",
         "tags": [
@@ -383,7 +411,32 @@
           }
       }
     },
-    "/partners": {
+    "/projects": {
+      "get": {
+        "summary": "Get all projects for the main page",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Get all project for the main page",
+        "operationId": "getAllProjects",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllProjectsResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/partners/admin": {
       "post": {
         "summary": "Add new partner",
         "tags": [
@@ -421,9 +474,37 @@
               "description": "Not authorized"
           }
         }
+      },
+      "get": {
+        "summary": "Get all partners for the admin panel",
+        "tags": [
+          "Partners"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get all partners for the admin panel",
+        "operationId": "getAllPartners",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllPartnersResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
       }
     },
-    "/partners/{id}": {
+    "/partners/admin{id}": {
       "put": {
         "summary": "Update partner info",
         "tags": [
@@ -508,7 +589,32 @@
           }
       }
     },
-    "/contacts": {
+    "/partners": {
+      "get": {
+        "summary": "Get all partners for the main page",
+        "tags": [
+          "Partners"
+        ],
+        "description": "Get all partners for the main page",
+        "operationId": "getAllPartners",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllPartnersResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/contacts/admin": {
       "put": {
         "summary": "Update contacts info",
         "tags": [
@@ -556,9 +662,62 @@
             "description": "Not authorized"
           }
         }
+      },
+      "get": {
+        "summary": "Get all reports for the admin panel",
+        "tags": [
+          "Contacts"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get all contacts for the admin panel",
+        "operationId": "getAllContacts",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllContactsResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
       }
     },
-    "/reports": {
+    "/contacts": {
+      "get": {
+        "summary": "Get all reports for the main page",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Get all contacts for the main page",
+        "operationId": "getAllContacts",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllContactsResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/reports/admin": {
       "post": {
         "summary": "Add new report",
         "tags": [
@@ -588,6 +747,34 @@
                 "application/json": {
                   "schema": {
                     "$ref": "#/components/schemas/AddReportResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all reports for the admin panel",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get all reports for the admin panel",
+        "operationId": "getAllReports",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllReportsResponse"
                   }
                 }
               }
@@ -650,7 +837,32 @@
         }
       }
     },
-     "/hero": {
+    "/reports": {
+      "get": {
+        "summary": "Get all reports for the main page",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get all reports for the main page",
+        "operationId": "getAllReports",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllReportsResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/hero/admin": {
       "post": {
         "summary": "Add new hero",
         "tags": [
@@ -688,9 +900,37 @@
               "description": "Not authorized"
           }
         }
+      },
+      "get": {
+        "summary": "Get all heroes for the admin panel",
+        "tags": [
+          "Heroes"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get all heroes for the admin panel",
+        "operationId": "getAllHeroes",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllHeroesResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
       }
     },
-    "/hero/{id}": {
+    "/hero/admin/{id}": {
       "put": {
         "summary": "Update hero info",
         "tags": [
@@ -775,7 +1015,32 @@
           }
       }
     },
-        "/bank": {
+    "/hero": {
+      "get": {
+        "summary": "Get all heroes for the main page",
+        "tags": [
+          "Heroes"
+        ],
+        "description": "Get all heroes for the main page",
+        "operationId": "getAllHeroes",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllHeroesResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/bank/admin": {
       "put": {
         "summary": "Update jar link",
         "tags": [
@@ -819,12 +1084,65 @@
             "description": "Not authorized"
           }
         }
+      },
+      "get": {
+        "summary": "Get jar link for the admin panel",
+        "tags": [
+          "Bank"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Get jar link for the admin panel",
+        "operationId": "getAllRequisites",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllRequisitesResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/bank": {
+      "get": {
+        "summary": "Get jar link for the main page",
+        "tags": [
+          "Bank"
+        ],
+        "description": "Get jar link for the main page",
+        "operationId": "getAllRequisites",
+        "responses": {
+          "200": {
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAllRequisitesResponse"
+                  }
+                }
+              }
+          },
+          "401": {
+              "description": "Not authorized"
+          }
+        }
       }
     }
   },
   "components": {
     "schemas": {
-      "login": {
+      "Login": {
         "type": "object",
         "properties": {
           "token": {
@@ -834,7 +1152,7 @@
           }
         }
       },
-      "getCurrentUser": {
+      "GetCurrentUser": {
         "type": "object",
         "properties": {
           "email": {
@@ -993,11 +1311,6 @@
                   "type": "string",
                   "description": "Partner image url",
                   "example": "partners\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
-              },
-              "date": {
-                "type": "string",
-                "description": "the creation time of partner (backend-generated)",
-                "example": "2023-05-15T10:51:30.531Z"
               }
           }
       },
@@ -1006,8 +1319,7 @@
                 "required": [
                     "title",
                     "link",
-                    "imageURL",
-                    "date"
+                    "imageURL"
                 ],
                 "properties": {
                     "title": {
@@ -1021,12 +1333,8 @@
                     "imageURL": {
                         "type": "string",
                         "format": "binary"
-                    },
-                    "date": {
-                        "type": "string",
-                        "example": "06.09.2023"
                     }
-             }
+            }
       },
       "UpdateContactResponse": {
         "type": "object",
@@ -1167,6 +1475,169 @@
                         "example": "monobank_link"
                     }
                 }
+      },
+      "GetAllProjectsResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of project",
+                  "example": "Project 1"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The description of project",
+                  "example": "This is the first project"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "description": "Link on project's photo",
+                  "example": "projects\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Backend-generated date of project creation",
+                  "example": "2023-09-06T13:06:19.775Z"
+                }
+              }
+            },
+            "description": "List of projects found by request"
+          }
+        }
+      },
+      "GetAllPartnersResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The name of partner",
+                  "example": "Partner 1"
+                },
+                "link": {
+                  "type": "string",
+                  "description": "The link on partner site",
+                  "example": "https://baza-trainee.tech/ua"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "description": "Link on project's photo",
+                  "example": "partners\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Backend-generated date of partner addition",
+                  "example": "2023-09-06T13:06:19.775Z"
+                }
+              }
+            },
+            "description": "List of partners found by request"
+          }
+        }
+      },
+      "GetAllReportResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "reportURL": {
+                  "type": "string",
+                  "description": "Link on project's photo",
+                  "example": "partners\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                }
+              }
+            },
+            "description": "List of reports found by request"
+          }
+        }
+      },
+      "GetAllContactsResponse": {  
+        "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "dokoopy@gmail.com"
+            },
+            "telegram": {
+              "type": "string",
+              "example": "@dokoopy"
+            }
+        }
+      },
+      "GetAllRequisitesResponse": {  
+        "type": "object",
+          "properties": {
+            "link": {
+              "type": "string",
+              "example": "mono_link"
+            }
+        }
+      },
+      "GetAllHeroesResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of hero",
+                  "example": "Hero 1"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The description of hero",
+                  "example": "This is the first hero slide"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "description": "Link on hero's photo",
+                  "example": "heroes\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Backend-generated date of hero creation",
+                  "example": "2023-09-06T13:06:19.775Z"
+                }
+              }
+            },
+            "description": "List of projects found by request"
+          }
+        }
       }
     },
     "securitySchemes": {

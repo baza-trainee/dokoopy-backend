@@ -11,8 +11,6 @@ const partnersDir = path.join(__dirname, '../', 'public', 'partners');
 
 const addPartner = async(req, res) => {
 
-    const date = new Date();
-
     const partners_data = await fs.readFile(partnersPath, 'utf-8');
     const partners = JSON.parse(partners_data)
     const image_id = nanoid();
@@ -27,7 +25,6 @@ const addPartner = async(req, res) => {
         title: req.body.title,
         link: req.body.link,
         imageURL,
-        date,
     }
 
     partners.push(newPartner);
@@ -82,7 +79,6 @@ const updatePartner = async(req, res) => {
         title: req.body.title,
         link: req.body.link,
         imageURL,
-        date: req.body.date,
     }
 
     partners.splice(index, 1, updPartner);

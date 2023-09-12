@@ -11,6 +11,6 @@ router.post('/admin', authMiddleware, upload.single('imageURL'), addProject);
 router.delete('/admin/:id', authMiddleware, deleteProject);
 router.put('/admin/:id', authMiddleware, upload.single('imageURL'), updateProject);
 router.get('/', getAllProjects);
-router.get('/admin', authMiddleware)
+router.get('/admin', authMiddleware, getAllProjects)
 
 module.exports = router;

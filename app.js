@@ -32,6 +32,13 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:5173", "https://dokoopy-frontend.vercel.app"],
+  })
+);
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
