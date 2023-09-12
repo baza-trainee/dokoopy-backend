@@ -39,6 +39,10 @@
       "description": "Projects block"
     },
     {
+      "name": "Bank",
+      "description": "Bank block"
+    },
+    {
       "name": "Heroes",
       "description": "Heroes block"
     },
@@ -793,6 +797,52 @@
             }
           }
       }
+    },
+        "/bank": {
+      "put": {
+        "summary": "Update jar link",
+        "tags": [
+          "Bank"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Update jar link in the database",
+        "operationId": "updateBank",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "link": {
+                    "type": "string",
+                    "example": "monobank_link"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBankLinkResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1177,6 +1227,15 @@
                     "date": {
                         "type": "string",
                         "example": "06.09.2023"
+                    }
+                }
+      },
+      "UpdateBankLinkResponse": {
+        "type": "object",
+                "properties": {
+                    "link": {
+                        "type": "string",
+                        "example": "monobank_link"
                     }
                 }
       }
