@@ -6,9 +6,8 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
-const mainRouter = require("./routes/api/main/main-routes");
 const authRouter = require("./routes/api/auth/auth-routes");
-const projectsRouter = require("./routes/api/projects/projects-routes");k
+const projectsRouter = require("./routes/api/projects/projects-routes");
 const bankRouter = require("./routes/api/bank/bank-routes");
 const heroRouter = require("./routes/api/hero/hero-routes");
 const reportsRouter = require("./routes/api/reports/reports-routes")
@@ -35,7 +34,6 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
-app.use("/api/main", mainRouter);
 app.use("/api/projects", projectsRouter);
 app.use("/api/bank", bankRouter);
 app.use("/api/hero", heroRouter);

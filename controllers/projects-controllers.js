@@ -95,8 +95,22 @@ const updateProject = async(req, res) => {
     });
 };
 
+const getAllProjects = async(req, res) => {
+
+    const projectsData = await fs.readFile(projectsPath, 'utf-8');
+    if (projectsData.length === 0) {
+        throw HttpError.NotFoundError("Projects not found");
+    }
+    const projects = JSON.parse(projectsData)
+
+    res.status(200).json({
+        projects,
+    });
+};
+
 module.exports = {
     addProject: controllerWrapper(addProject),
     deleteProject: controllerWrapper(deleteProject),
     updateProject: controllerWrapper(updateProject),
+    getAllProjects: controllerWrapper(getAllProjects),
 };

@@ -94,8 +94,22 @@ const updateHero = async(req, res) => {
     });
 };
 
+const getAllHeroes = async(req, res) => {
+
+    const heroesData = await fs.readFile(heroesPath, 'utf-8');
+    if (heroesData.length === 0) {
+        throw HttpError.NotFoundError("Heroes not found");
+    }
+    const heroes = JSON.parse(heroesData)
+
+    res.status(200).json({
+        heroes,
+    });
+};
+
 module.exports = {
     addHero: controllerWrapper(addHero),
     deleteHero: controllerWrapper(deleteHero),
     updateHero: controllerWrapper(updateHero),
+    getAllHeroes: controllerWrapper(getAllHeroes),
 };

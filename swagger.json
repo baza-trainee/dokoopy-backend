@@ -60,29 +60,6 @@
     }
   ],
   "paths": {
-    "/main": {
-      "get": {
-        "summary": "Get all partners and projects",
-        "tags": ["Main"],
-        "description": "Returns all partners and projects from the DB",
-        "operationId": "getAllProjectsAndPartners",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListOfProjectsAndPartnersResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Partners or projects not found"
-          }
-        }
-      }
-    },
     "/auth/login": {
       "post": {
         "summary": "Login admin user to Administration panel",
@@ -847,54 +824,6 @@
   },
   "components": {
     "schemas": {
-      "ListOfProjectsAndPartnersResponse": {
-        "type": "object",
-        "properties": {
-          "projects": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Backend-generated unique identifier",
-                  "example": "GGHJlhkj668__hjkhjkhh$%"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "The short text describing specific project)",
-                  "example": "Ми - 57 бригада та беремо участь у найзапекліших боях...."
-                },
-                "imageURL": {
-                  "type": "string",
-                  "description": "Link on project image",
-                  "example": "https://dokoopy.onrender.com/projects/1.jpg"
-                }
-              }
-            },
-            "description": "List of projects found by request"
-          },
-          "partners": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Backend-generated unique identifier",
-                  "example": "GGHJlhkj668__hjkhjkhh$%"
-                },
-                "imageURL": {
-                  "type": "string",
-                  "description": "Link on partner image",
-                  "example": "https://dokoopy.onrender.com/partners/5.jpg"
-                }
-              }
-            },
-            "description": "List of partners found by request"
-          }
-        }
-      },
       "login": {
         "type": "object",
         "properties": {

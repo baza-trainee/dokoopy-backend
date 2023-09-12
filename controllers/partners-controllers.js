@@ -95,8 +95,22 @@ const updatePartner = async(req, res) => {
     });
 };
 
+const getAllPartners = async(req, res) => {
+
+    const partnersData = await fs.readFile(partnersPath, 'utf-8');
+    if (partnersData.length === 0) {
+        throw HttpError.NotFoundError("Partners not found");
+    }
+    const partners = JSON.parse(partnersData)
+
+    res.status(200).json({
+        partners,
+    });
+}
+
 module.exports = {
     addPartner: controllerWrapper(addPartner),
     deletePartner: controllerWrapper(deletePartner),
     updatePartner: controllerWrapper(updatePartner),
+    getAllPartners: controllerWrapper(getAllPartners),
 };
