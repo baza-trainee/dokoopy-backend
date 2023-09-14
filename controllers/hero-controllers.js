@@ -4,12 +4,10 @@ const { nanoid } = require('nanoid');
 const path = require('path');
 const controllerWrapper = require("../utils/controllerWrapper");
 
-
 const heroesPath = path.join(__dirname, '../db/heroes/heroes.json');
 const heroesDir = path.join(__dirname, '../', 'public', 'heroes');
 
 const addHero = async(req, res) => {
-
     const date = new Date();
 
     const heroes_data = await fs.readFile(heroesPath, 'utf-8');

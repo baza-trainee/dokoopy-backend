@@ -122,11 +122,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Token deleted"
+          "200": {
+            "description": "Logout success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Not authorized"
           }
         },
         "security": [
@@ -165,7 +165,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Not authorized"
           }
         },
         "security": [
