@@ -785,7 +785,7 @@
         }
       }
     },
-    "/reports/{id}": {
+    "/reports/admin/{id}": {
       "put": {
         "summary": "Update report",
         "tags": [
