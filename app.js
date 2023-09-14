@@ -6,7 +6,6 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
-const mainRouter = require("./routes/api/main/main-routes");
 const authRouter = require("./routes/api/auth/auth-routes");
 const projectsRouter = require("./routes/api/projects/projects-routes");
 const bankRouter = require("./routes/api/bank/bank-routes");
@@ -33,9 +32,15 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:5173", "https://dokoopy-frontend.vercel.app"],
+  })
+);
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
-app.use("/api/main", mainRouter);
 app.use("/api/projects", projectsRouter);
 app.use("/api/bank", bankRouter);
 app.use("/api/hero", heroRouter);

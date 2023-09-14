@@ -26,7 +26,7 @@ const login = async (req, res) => {
     });
 
     user.token = token;
-    await fs.writeFile(userPath, JSON.stringify(user), "utf-8");
+    await fs.writeFile(userPath, JSON.stringify(user, null, 2), "utf-8");
   } else {
     throw HttpError.BadRequest("Wrong email or password");
   }
@@ -38,27 +38,20 @@ const logout = async (req, res) => {
   const usersData = await fs.readFile(userPath, "utf-8");
   const user = await JSON.parse(usersData);
 
-  if (req.token === user.token) {
-    user.token = null;
-    await fs.writeFile(userPath, JSON.stringify(user), "utf-8");
-  } else {
-    throw HttpError.UnauthorizedError("Not authorized");
-  }
+  user.token = "";
+  await fs.writeFile(userPath, JSON.stringify(user, null, 2), "utf-8");
 
-  res.status(204).json("No Content");
+  res.status(200).json({
+    message: "Logout success"
+  })
 };
 
 const getCurrentUser = async (req, res) => {
-  const usersData = await fs.readFile(userPath, "utf-8");
-  const user = await JSON.parse(usersData);
-  let answer;
-  if (req.token === user.token) {
-    answer = { email: user.email };
-  } else {
-    throw HttpError.UnauthorizedError("Not authorized");
-  }
-
-  res.status(200).json(answer);
+  const { email } = req.user;
+  
+  res.status(200).json({
+    email,
+})
 };
 
 const forgotPassword = async (req, res) => {

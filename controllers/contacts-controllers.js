@@ -20,6 +20,20 @@ const updateContact = async(req, res) => {
     });
 };
 
+const getAllContacts = async(req, res) => {
+
+    const contactsData = await fs.readFile(contactsPath, 'utf-8');
+    if (contactsData.length === 0) {
+        throw HttpError.NotFoundError("Contacts not found");
+    }
+    const contacts = JSON.parse(contactsData)
+
+    res.status(200).json({
+        contacts,
+    });
+};
+
 module.exports = {
     updateContact: controllerWrapper(updateContact),
+    getAllContacts: controllerWrapper(getAllContacts),
 };

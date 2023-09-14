@@ -4,12 +4,10 @@ const { nanoid } = require('nanoid');
 const path = require('path');
 const controllerWrapper = require("../utils/controllerWrapper");
 
-
 const heroesPath = path.join(__dirname, '../db/heroes/heroes.json');
 const heroesDir = path.join(__dirname, '../', 'public', 'heroes');
 
 const addHero = async(req, res) => {
-
     const date = new Date();
 
     const heroes_data = await fs.readFile(heroesPath, 'utf-8');
@@ -94,8 +92,22 @@ const updateHero = async(req, res) => {
     });
 };
 
+const getAllHeroes = async(req, res) => {
+
+    const heroesData = await fs.readFile(heroesPath, 'utf-8');
+    if (heroesData.length === 0) {
+        throw HttpError.NotFoundError("Heroes not found");
+    }
+    const heroes = JSON.parse(heroesData)
+
+    res.status(200).json({
+        heroes,
+    });
+};
+
 module.exports = {
     addHero: controllerWrapper(addHero),
     deleteHero: controllerWrapper(deleteHero),
     updateHero: controllerWrapper(updateHero),
+    getAllHeroes: controllerWrapper(getAllHeroes),
 };

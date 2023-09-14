@@ -19,6 +19,20 @@ const updateBank = async(req, res) => {
     });
 };
 
+const getAllRequisites = async(req, res) => {
+
+    const bankData = await fs.readFile(bankPath, 'utf-8');
+    if (bankData.length === 0) {
+        throw HttpError.NotFoundError("Requisites not found");
+    }
+    const bank = JSON.parse(bankData)
+
+    res.status(200).json({
+        bank,
+    });
+};
+
 module.exports = {
     updateBank: controllerWrapper(updateBank),
+    getAllRequisites: controllerWrapper(getAllRequisites),
 };

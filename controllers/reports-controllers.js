@@ -67,7 +67,21 @@ const updateReport = async(req, res) => {
     });
 };
 
+const getAllReports = async(req, res) => {
+
+    const reportsData = await fs.readFile(reportsPath, 'utf-8');
+    if (reportsData.length === 0) {
+        throw HttpError.NotFoundError("Reports not found");
+    }
+    const reports = JSON.parse(reportsData)
+
+    res.status(200).json({
+        reports,
+    });
+};
+
 module.exports = {
     addReport: controllerWrapper(addReport),
     updateReport: controllerWrapper(updateReport),
+    getAllReports: controllerWrapper(getAllReports),
 };

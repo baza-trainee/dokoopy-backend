@@ -12,10 +12,10 @@ const {
 
 const router = express.Router();
 
-router.post("/login", login);
-router.post("/forgot-password", forgotPassword);
-router.post("/reset-password/:resetToken", resetPassword);
-router.get("/logout", authMiddleware, logout);
-router.get("/current", authMiddleware, getCurrentUser);
+router.post("/admin/login", login);
+router.post("/admin/forgot-password", forgotPassword);
+router.post("/admin/reset-password/:resetToken", resetPassword);
+router.get("/admin/logout", authMiddleware, logout);
+router.get("/admin/current", authMiddleware, getCurrentUser);
 
 module.exports = router;
