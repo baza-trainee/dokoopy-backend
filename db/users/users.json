@@ -1,6 +1,6 @@
 {
   "id": "1",
-  "email": "alen8dtester@gmail.com",
+  "email": "test@test.com",
   "password": "$2b$10$CPhPhOmmu889g/dyWlOwKeWNiziHzb69nGTqHUzYCTk6HCZAJ0x2q",
-  "token": ""
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTQ3OTYyODIsImV4cCI6MTY5NDc5OTg4Mn0.a1vY3TH-8-IJhkdyubsuAxmyEpB1QwjLVLfExu6Virk"
 }
