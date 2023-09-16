@@ -294,6 +294,9 @@
           },
           "401": {
               "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
@@ -374,6 +377,9 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
@@ -472,6 +478,9 @@
           },
           "401": {
               "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
@@ -552,6 +561,9 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
@@ -833,6 +845,9 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       }
@@ -898,6 +913,9 @@
           },
           "401": {
               "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
@@ -978,6 +996,9 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "File too large"
           }
         }
       },
