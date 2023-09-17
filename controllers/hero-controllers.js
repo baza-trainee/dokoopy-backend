@@ -98,8 +98,9 @@ const getAllHeroes = async(req, res) => {
     if (heroesData.length === 0) {
         throw HttpError.NotFoundError("Heroes not found");
     }
-    const heroes = JSON.parse(heroesData)
-
+    const data = JSON.parse(heroesData);
+    const heroes = data.sort((firstHero, secondHero) => new Date(secondHero.date) - new Date(firstHero.date))
+    
     res.status(200).json({
         heroes,
     });
