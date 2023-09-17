@@ -101,7 +101,8 @@ const getAllProjects = async(req, res) => {
     if (projectsData.length === 0) {
         throw HttpError.NotFoundError("Projects not found");
     }
-    const projects = JSON.parse(projectsData)
+    const data = JSON.parse(projectsData);
+    const projects = data.sort((firstProject, secondProject) => new Date(secondProject.date) - new Date(firstProject.date))
 
     res.status(200).json({
         projects,

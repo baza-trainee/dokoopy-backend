@@ -2,5 +2,5 @@
   "id": "1",
   "email": "test@test.com",
   "password": "$2b$10$CPhPhOmmu889g/dyWlOwKeWNiziHzb69nGTqHUzYCTk6HCZAJ0x2q",
-  "token": ""
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2OTQ5NjQ4MDcsImV4cCI6MTY5NDk2ODQwN30.uyefntst2blW_2_IEChulH424ighlIkbtfA5R9kDjV4"
 }
