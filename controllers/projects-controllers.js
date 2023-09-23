@@ -25,7 +25,9 @@ const addProject = async(req, res) => {
     const newProject = {
         id: nanoid(),
         title: req.body.title,
+        title_eng: req.body.title_eng,
         description: req.body.description,
+        description_eng: req.body.description_eng,
         imageURL,
         date,
     }
@@ -80,7 +82,9 @@ const updateProject = async(req, res) => {
     const updProject = {
         id: req.params.id,
         title: req.body.title,
+        title_eng: req.body.title_eng,
         description: req.body.description,
+        description_eng: req.body.description_eng,
         imageURL,
         date: req.body.date,
     }

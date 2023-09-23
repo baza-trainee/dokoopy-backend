@@ -23,6 +23,7 @@ const addHero = async(req, res) => {
         id: nanoid(),
         title: req.body.title,
         description: req.body.description,
+        description_eng: req.body.description_eng,
         imageURL,
         date,
     }
@@ -78,6 +79,7 @@ const updateHero = async(req, res) => {
         id: req.params.id,
         title: req.body.title,
         description: req.body.description,
+        description_eng: req.body.description_eng,
         imageURL,
         date: req.body.date,
     }

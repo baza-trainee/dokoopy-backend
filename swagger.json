@@ -1213,17 +1213,27 @@
         "type": "object",
         "required": [
           "title",
+          "title_eng",
           "description",
+          "description_eng",
           "imageURL"
         ],
         "properties": {
           "title": {
               "type": "string",
-              "example": "Project 1"
+              "example": "Проєкт 1"
+          },
+          "title_eng": {
+            "type": "string",
+            "example": "Project 1"
           },
             "description": {
               "type": "string",
-              "example": "This is the first project"
+              "example": "Це опис проекту"
+          },
+            "description_eng": {
+              "type": "string",
+              "example": "This is the project description"
           },
             "imageURL": {
               "type": "string",
@@ -1241,13 +1251,22 @@
               },
               "title": {
                 "type": "string",
-                "description": "Project title",
+                "description": "Project title in ukrainian",
+                "example": "Проєкт 1"
+              },
+              "title_eng": {
+                "type": "string",
+                "description": "Project title in english",
                 "example": "Project 1"
               },
               "description": {
                 "type": "string",
                 "description": "Project description",
-                "example": "This is the first project"
+                "example": "Це опис проекту"
+              },
+              "description_eng": {
+                "type": "string",
+                "example": "This is the project description"
               },
               "imageURL": {
                   "type": "string",
@@ -1265,18 +1284,28 @@
                 "type": "object",
                 "required": [
                     "title",
+                    "title_eng",
                     "description",
+                    "description_eng",
                     "imageURL",
                     "date"
                 ],
                 "properties": {
                     "title": {
-                        "type": "string",
-                        "example": "Project 1"
+                      "type": "string",
+                      "example": "Проєкт 1"
+                    },
+                    "title_eng": {
+                      "type": "string",
+                      "example": "Project 1"
                     },
                     "description": {
-                        "type": "string",
-                        "example": "This is the first project"
+                      "type": "string",
+                      "example": "Це перший проєкт"
+                    },
+                    "description_eng": {
+                      "type": "string",
+                      "example": "This is the first project"
                     },
                     "imageURL": {
                         "type": "string",
@@ -1414,6 +1443,7 @@
         "required": [
           "title",
           "description",
+          "description_eng",
           "imageURL"
         ],
         "properties": {
@@ -1421,11 +1451,15 @@
               "type": "string",
               "example": "Hero 1"
           },
-            "description": {
+          "description": {
               "type": "string",
-              "example": "This is the super hero description"
+              "example": "Це опис слайдера"
           },
-            "imageURL": {
+          "description_eng": {
+            "type": "string",
+            "example": "This is the super hero description"
+        },
+          "imageURL": {
               "type": "string",
               "format": "binary"
           }
@@ -1447,6 +1481,11 @@
               "description": {
                 "type": "string",
                 "description": "Project description",
+                "example": "Це опис слайдера"
+              },
+              "description_eng": {
+                "type": "string",
+                "description": "Project description",
                 "example": "This is the super hero description"
               },
               "imageURL": {
@@ -1466,6 +1505,7 @@
                 "required": [
                     "title",
                     "description",
+                    "description_eng",
                     "imageURL",
                     "date"
                 ],
@@ -1475,6 +1515,10 @@
                         "example": "Hero 1"
                     },
                     "description": {
+                        "type": "string",
+                        "example": "Це опис слайдера"
+                    },
+                    "description_eng": {
                         "type": "string",
                         "example": "This is the super hero description"
                     },
@@ -1513,9 +1557,19 @@
                 "title": {
                   "type": "string",
                   "description": "The title of project",
+                  "example": "Проєкт 1"
+                },
+                "title_eng": {
+                  "type": "string",
+                  "description": "The title of project",
                   "example": "Project 1"
                 },
                 "description": {
+                  "type": "string",
+                  "description": "The description of project",
+                  "example": "Це перший проєкт"
+                },
+                "description_eng": {
                   "type": "string",
                   "description": "The description of project",
                   "example": "This is the first project"
@@ -1640,6 +1694,11 @@
                   "example": "Hero 1"
                 },
                 "description": {
+                  "type": "string",
+                  "description": "The description of hero",
+                  "example": "Це перший слайдер"
+                },
+                "description_eng": {
                   "type": "string",
                   "description": "The description of hero",
                   "example": "This is the first hero slide"
