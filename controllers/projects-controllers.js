@@ -77,7 +77,7 @@ const updateProject = async(req, res) => {
         const resultUpload = path.join(projectsDir, filename);
         await fs.rename(tempUpload, resultUpload);
         imageURL = path.join('projects', filename);
-    }
+    } else imageURL = req.body.imageURL;
 
     const updProject = {
         id: req.params.id,
@@ -86,7 +86,7 @@ const updateProject = async(req, res) => {
         description: req.body.description,
         description_eng: req.body.description_eng,
         imageURL,
-        date: req.body.date,
+        date: projects[index].date,
     }
 
     projects.splice(index, 1, updProject);

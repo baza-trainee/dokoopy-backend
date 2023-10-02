@@ -72,7 +72,7 @@ const updatePartner = async(req, res) => {
         const resultUpload = path.join(partnersDir, filename);
         await fs.rename(tempUpload, resultUpload);
         imageURL = path.join('partners', filename);
-    }
+    } else imageURL = req.body.imageURL;
 
     const updPartner = {
         id: req.params.id,
