@@ -73,7 +73,7 @@ const updateHero = async(req, res) => {
         const resultUpload = path.join(heroesDir, filename);
         await fs.rename(tempUpload, resultUpload);
         imageURL = path.join('heroes', filename);
-    }
+    } else imageURL = req.body.imageURL;
 
     const updHero = {
         id: req.params.id,
@@ -81,7 +81,7 @@ const updateHero = async(req, res) => {
         description: req.body.description,
         description_eng: req.body.description_eng,
         imageURL,
-        date: req.body.date,
+        date: heroes[index].date,
     }
 
     heroes.splice(index, 1, updHero);
