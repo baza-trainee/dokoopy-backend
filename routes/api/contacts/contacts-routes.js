@@ -6,8 +6,8 @@ const { authMiddleware } = require('../../../utils/authMiddleware');
 
 const router = express.Router();
 
-router.put('/admin', authMiddleware, updateContact);
+router.put('/admin', updateContact);
 router.get('/', getAllContacts);
-router.get('/admin', authMiddleware, getAllContacts);
+router.get('/admin', getAllContacts);
 
 module.exports = router;
