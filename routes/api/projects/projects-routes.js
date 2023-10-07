@@ -7,10 +7,10 @@ const { authMiddleware } = require('../../../utils/authMiddleware');
 
 const router = express.Router();
 
-router.post('/admin', authMiddleware, upload.single('imageURL'), addProject);
-router.delete('/admin/:id', authMiddleware, deleteProject);
-router.put('/admin/:id', authMiddleware, upload.single('imageURL'), updateProject);
+router.post('/admin', upload.single('imageURL'), addProject);
+router.delete('/admin/:id', deleteProject);
+router.put('/admin/:id', upload.single('imageURL'), updateProject);
 router.get('/', getAllProjects);
-router.get('/admin', authMiddleware, getAllProjects)
+router.get('/admin', getAllProjects)
 
 module.exports = router;
