@@ -18,7 +18,7 @@ const contactSchema = new Schema(
 
 contactSchema.post("save", handleMongooseError);
 
-const Contact = model("contact", bankSchema);
+const Contact = model("contact", cantactSchema);
 
 module.exports = {
   Contact,

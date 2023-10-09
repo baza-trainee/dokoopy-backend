@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const handleMongooseError = require("../../utils/handleMongooseError");
 
-const contactSchema = new Schema(
+const userSchema = new Schema(
   {
     email: {
       type: String,

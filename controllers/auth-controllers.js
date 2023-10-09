@@ -1,45 +1,44 @@
 const fs = require("fs/promises");
-const path = require("path");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const HttpError = require("../utils/HttpError");
 const controllerWrapper = require("../utils/controllerWrapper");
 const { RESET_PASSWORD_SECRET_KEY, BASE_URL, FRONT_LOCALHOST } = process.env;
+const { User } = require("../db/models/users");
 const resetPasswordHtml = require('../utils/resetPasswordEmail');
 const sendEmail = require('../utils/sendEmail');
 
-const userPath = path.join(__dirname, "../db/users/users.json");
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password} = req.body;
+  const formattedEmail = email.toLowerCase();
+    const user = await User.findOne({ email: formattedEmail });
+    if (!user) { 
+        throw new HttpError(401, "Email or password is wrong");
+    }
 
-  const usersData = await fs.readFile(userPath, "utf-8");
-  const user = await JSON.parse(usersData);
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    if (!passwordCompare) { 
+        throw new HttpError(401, "Email or password is wrong");
+    }
 
-  if (user.token) {
-    throw HttpError.ConflictError("User is logged in before");
-  }
+    const payload = {
+        id: user._id,
+    }
 
-  if (user.email === email && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
-      expiresIn: 3600,
-    });
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: 3600 });
+    await User.findByIdAndUpdate(user._id, { token });
 
-    user.token = token;
-    await fs.writeFile(userPath, JSON.stringify(user, null, 2), "utf-8");
-  } else {
-    throw HttpError.BadRequest("Wrong email or password");
-  }
-
-  res.status(200).json(user.token);
+    res.status(201).json({
+        status: 'success',
+        code: 201,
+        token,
+    },);
 };
 
 const logout = async (req, res) => {
-  const usersData = await fs.readFile(userPath, "utf-8");
-  const user = await JSON.parse(usersData);
-
-  user.token = "";
-  await fs.writeFile(userPath, JSON.stringify(user, null, 2), "utf-8");
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: "" });
 
   res.status(200).json({
     message: "Logout success"
@@ -56,24 +55,24 @@ const getCurrentUser = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
-  const usersData = await fs.readFile(userPath, "utf-8");
-  const user = await JSON.parse(usersData);
+  const formattedEmail = email.toLowerCase();
 
-  if (user.email !== email) {
-    throw new HttpError(404, "User not found")
-  }
+  const user = await User.findOne({ email: formattedEmail });
+    if (!user) { 
+        throw new HttpError(404, "User not found");
+    }
 
   const payload = {
-      email: user.email,
+      id: user._id,
   };
-
+  
   const resetToken = jwt.sign(payload, RESET_PASSWORD_SECRET_KEY, { expiresIn: 3600 });
 
   const resetPasswordEmail = {
       to: email,
       subject: "Зміна паролю для входу на сайт Dokoopy",
       html: `${resetPasswordHtml}
-      target="_blank" href="${FRONT_LOCALHOST}/api/auth/reset-password/${resetToken}">Змінити пароль</a>
+      target="_blank" href="${BASE_URL}/api/auth/reset-password/${resetToken}">Змінити пароль</a>
       </div>
       `
   };
@@ -88,21 +87,17 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const { resetToken } = req.params;
-  const { password } = req.body;
-
-  const usersData = await fs.readFile(userPath, "utf-8");
-  const user = await JSON.parse(usersData);
+  const {id, resetToken} = req.params;
+  const {password} = req.body;
 
   jwt.verify(resetToken, RESET_PASSWORD_SECRET_KEY, function(err, decoded) {
       if (err) {
           throw new HttpError(403, "Reset token is expired")
       }
-    });
+  });
 
   const hashPassword = await bcrypt.hash(password, 10);
-  user.password = hashPassword;
-  await fs.writeFile(userPath, JSON.stringify(user), "utf-8");
+  await User.findByIdAndUpdate({_id: id},{ password: hashPassword });
 
   res.status(200).json({
       status: 'success',

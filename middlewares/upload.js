@@ -3,7 +3,8 @@ const sftpStorage = require('multer-sftp')
 
 var storage = sftpStorage({
     sftp: {
-      host: 'ftp.79-wings.site',
+      //host: 'ftp.79-wings.site',
+      host: "31.131.18.140",
       port: 21,
       username: 'dokoopy@79-wings.site',
       password: '08102023dokoopy'
