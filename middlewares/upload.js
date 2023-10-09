@@ -1,17 +1,23 @@
 const multer = require('multer');
-const path = require('path');
+const sftpStorage = require('multer-sftp')
 
-const tempDir = path.join(__dirname, '../', 'temp');
-
-const multerConfig = multer.diskStorage({
-    destination: tempDir,
-    filename: (req, file, cb) => { 
-        cb(null, file.originalname);
+var storage = sftpStorage({
+    sftp: {
+      host: 'ftp.79-wings.site',
+      port: 21,
+      username: 'dokoopy@79-wings.site',
+      password: '08102023dokoopy'
+    },
+    destination: function (req, file, cb) {
+      cb(null, "www.uashared15.twinservers.net:2083/cpsess3364396298/frontend/jupiter/filemanager/index.html?dirselect=homedir&dir=/public_html/dokoopy_images")
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
     }
-})
+  })
 
 const upload = multer({
-    storage: multerConfig,
+    storage: storage,
     limits: {
         fileSize: 1024 * 1024 * 5, // 5 MB
     },
