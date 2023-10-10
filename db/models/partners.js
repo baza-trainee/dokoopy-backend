@@ -14,7 +14,7 @@ const partnerSchema = new Schema(
     },
     imageURL: {
       type: Buffer,
-      required: true,
+      required: false,
     },
   },
   { versionKey: false, timestamps: true }

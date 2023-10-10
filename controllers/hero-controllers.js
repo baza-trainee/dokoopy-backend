@@ -25,7 +25,7 @@ const deleteHero = async(req, res) => {
 
     const result = await Hero.findByIdAndDelete(id);
     if (!result) {
-      throw HttpError.NotFoundError("Hero not found");
+        throw HttpError.NotFoundError("Hero not found");
     }
     
     res.status(200).json({

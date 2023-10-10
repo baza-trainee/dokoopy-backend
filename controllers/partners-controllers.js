@@ -1,52 +1,32 @@
-const fs = require('fs/promises');
 require("dotenv").config();
-const { nanoid } = require('nanoid');
-const path = require('path');
 const HttpError = require("../utils/HttpError");
 const controllerWrapper = require("../utils/controllerWrapper");
-
-
-const partnersPath = path.join(__dirname, '../db/partners/partners.json');
-const partnersDir = path.join(__dirname, '../', 'public', 'partners');
+const { Partner } = require("../db/models/partners");
 
 const addPartner = async(req, res) => {
-
-    const partners_data = await fs.readFile(partnersPath, 'utf-8');
-    const partners = JSON.parse(partners_data)
-    const image_id = nanoid();
-    const { path: tempUpload, originalname } = req.file;
-    const filename = `${image_id}_${originalname}`;
-    const resultUpload = path.join(partnersDir, filename);
-    await fs.rename(tempUpload, resultUpload);
-    const imageURL = path.join('partners', filename);
-    
-    const newPartner = {
-        id: nanoid(),
-        title: req.body.title,
-        link: req.body.link,
-        imageURL,
+    let data;
+    if (req.file) {
+        const uploaded = req.file.location;
+        data = { ...req.body, imageURL: uploaded}
+    } else {
+        data = { ...req.body }
     }
-
-    partners.push(newPartner);
-    await fs.writeFile(partnersPath, JSON.stringify(partners, null, 2));
+    const newPartner = await Partner.create(data);
 
     res.status(201).json({
         status: 'success',
         code: 201,
         newPartner,
-    });
+    });  
 };
 
 const deletePartner = async(req, res) => {
-    const partners_data = await fs.readFile(partnersPath, 'utf-8');
-    const partners = JSON.parse(partners_data);
+    const { id } = req.params;
 
-    const index = partners.findIndex(partner => partner.id === req.params.id);
-    if (index === -1) {
-        return null
+    const result = await Partner.findByIdAndDelete(id);
+    if (!result) {
+        throw HttpError.NotFoundError("Partner not found");
     }
-    partners.splice(index, 1);
-    await fs.writeFile(partnersPath, JSON.stringify(partners, null, 2));
     
     res.status(200).json({
         status: 'success',
@@ -56,33 +36,20 @@ const deletePartner = async(req, res) => {
 };
 
 const updatePartner = async(req, res) => {
-    const partners_data = await fs.readFile(partnersPath, 'utf-8');
-    const partners = JSON.parse(partners_data);
-
-    const index = partners.findIndex(partner => partner.id === req.params.id);
-    if (index === -1) {
-        return null
-    };
-
-    let imageURL = "";
-    const image_id = nanoid();
+    const { id } = req.params;
+    let data;
     if (req.file) {
-        const { path: tempUpload, originalname } = req.file;
-        const filename = `${image_id}_${originalname}`;
-        const resultUpload = path.join(partnersDir, filename);
-        await fs.rename(tempUpload, resultUpload);
-        imageURL = path.join('partners', filename);
-    } else imageURL = req.body.imageURL;
-
-    const updPartner = {
-        id: req.params.id,
-        title: req.body.title,
-        link: req.body.link,
-        imageURL,
+        const uploaded = req.file.location;
+        data = { ...req.body, imageURL: uploaded}
+    } else {
+        data = { ...req.body }
     }
 
-    partners.splice(index, 1, updPartner);
-    await fs.writeFile(partnersPath, JSON.stringify(partners, null, 2));
+    const updPartner = await Partner.findByIdAndUpdate(id, data, { new: true });
+
+    if (!updPartner) {
+        throw new HttpError(404, 'Partner not found');
+    }
 
         res.status(200).json({
             status: 'success',
@@ -93,11 +60,11 @@ const updatePartner = async(req, res) => {
 
 const getAllPartners = async(req, res) => {
 
-    const partnersData = await fs.readFile(partnersPath, 'utf-8');
-    if (partnersData.length === 0) {
+    const partners = await Partner.find({}).sort({ createdAt: -1 });
+
+    if (partners.length === 0) {
         throw HttpError.NotFoundError("Partners not found");
     }
-    const partners = JSON.parse(partnersData)
 
     res.status(200).json({
         partners,
