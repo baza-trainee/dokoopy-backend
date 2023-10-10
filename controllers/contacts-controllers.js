@@ -4,17 +4,17 @@ const HttpError = require("../utils/HttpError");
 const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
-    const updContact = {
-        email: req.body.email,
-        data: req.body.telegram,
-    }
+    const {id} = req.params;
+    const { email, telegram } = req.body;
 
-    await fs.writeFile(contactsPath, JSON.stringify(updContact, null, 2));
-    
-    res.status(200).json({
-        status: 'success',
-        code: 200,
-        updContact,
+    const updContact = await Contact.findByIdAndUpdate(id, {email: email, telegram: telegram}, {new: true});
+    if(!updContact) {
+      throw new HttpError(404, 'Contacts not found');
+    }
+    res.status(201).json({
+      status: 'success',
+      code: 200,
+      updContact,
     });
 };
 
