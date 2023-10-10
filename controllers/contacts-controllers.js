@@ -1,9 +1,7 @@
-const fs = require('fs/promises');
 require("dotenv").config();
-const path = require('path');
 const controllerWrapper = require("../utils/controllerWrapper");
-
-const contactsPath = path.join(__dirname, '../db/contacts/contacts.json');
+const HttpError = require("../utils/HttpError");
+const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
     const updContact = {
@@ -21,12 +19,11 @@ const updateContact = async(req, res) => {
 };
 
 const getAllContacts = async(req, res) => {
+    const contacts = await Contact.find({})
 
-    const contactsData = await fs.readFile(contactsPath, 'utf-8');
-    if (contactsData.length === 0) {
+    if (contacts.length === 0) {
         throw HttpError.NotFoundError("Contacts not found");
     }
-    const contacts = JSON.parse(contactsData)
 
     res.status(200).json({
         contacts,
