@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/admin', upload.single('imageURL'), addHero);
 router.delete('/admin/:id', deleteHero);
-router.put('/admin/:id', upload.single('imageURL'), updateHero);
+router.patch('/admin/:id', upload.single('imageURL'), updateHero);
 router.get('/', getAllHeroes);
 router.get('/admin', getAllHeroes);
 
