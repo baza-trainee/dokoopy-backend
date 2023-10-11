@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require('express');
 
 const { updateContact, getAllContacts } = require('../../../controllers/contacts-controllers');
-const { authMiddleware } = require('../../../utils/authMiddleware');
+const { authMiddleware } = require('../../../middlewares/authMiddleware');
 
 const router = express.Router();
 

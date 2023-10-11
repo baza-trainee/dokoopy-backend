@@ -1,5 +1,4 @@
 require("dotenv").config();
-const { nanoid } = require('nanoid');
 const controllerWrapper = require("../utils/controllerWrapper");
 const { Hero } = require("../db/models/heroes");
 
@@ -8,6 +7,7 @@ const addHero = async(req, res) => {
     if (req.file) {
         console.log(req.file)
         const uploaded = req.file.path;
+        console.log(uploaded)
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }

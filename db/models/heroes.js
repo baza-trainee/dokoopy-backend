@@ -17,8 +17,8 @@ const heroSchema = new Schema(
       required: true,
     },
     imageURL: {
-      type: Buffer,
-      required: false,
+      type: String,
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }

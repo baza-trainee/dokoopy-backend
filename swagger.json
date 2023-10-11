@@ -1271,7 +1271,7 @@
               "imageURL": {
                   "type": "string",
                   "description": "Project image url",
-                  "example": "projects\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
+                  "example": "https://res.cloudinary.com/dwvdhkbkm/image/upload/v1697058515/dokoopy/o1tvpkyfeygpazxhuqba.jpg"
               },
               "date": {
                 "type": "string",

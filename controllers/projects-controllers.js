@@ -7,7 +7,7 @@ const addProject = async(req, res) => {
 
     let data;
     if (req.file) {
-        const uploaded = req.file.location;
+        const uploaded = req.file.path;
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }
@@ -41,7 +41,7 @@ const updateProject = async(req, res) => {
     const { id } = req.params;
     let data;
     if (req.file) {
-        const uploaded = req.file.location;
+        const uploaded = req.file.path;
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }

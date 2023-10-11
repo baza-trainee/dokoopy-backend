@@ -35,22 +35,21 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  folder: "dokoopy",
-  allowedFormats: ["jpg", "png", "pdf"],
-  params: {
-    transformation: [
-      {
-        width: 400,
-        height: null,
-        scale: "both"
-      }
-    ]
+  params:{
+    folder: 'dokoopy',
+    allowedFormats : ["jpg", "jpeg", "png", "pdf", "svg"],
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+      storage: storage,
+      limits: {
+          fileSize: 1024 * 1024 * 5, // 5 MB
+      },
+  });
+
 
 module.exports = upload;

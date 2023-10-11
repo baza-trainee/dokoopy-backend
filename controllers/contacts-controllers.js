@@ -4,17 +4,17 @@ const HttpError = require("../utils/HttpError");
 const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const { email, telegram } = req.body;
 
     const updContact = await Contact.findByIdAndUpdate(id, {email: email, telegram: telegram}, {new: true});
     if(!updContact) {
-      throw new HttpError(404, 'Contacts not found');
+        throw new HttpError(404, 'Contacts not found');
     }
     res.status(201).json({
-      status: 'success',
-      code: 200,
-      updContact,
+        status: 'success',
+        code: 200,
+        updContact,
     });
 };
 

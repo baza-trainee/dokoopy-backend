@@ -6,7 +6,6 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-const {Report} = require("./db/models/reports")
 
 const authRouter = require("./routes/api/auth/auth-routes");
 const projectsRouter = require("./routes/api/projects/projects-routes");
@@ -20,21 +19,11 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-// app.get("/", (req, res, next) => {
-//   res.render("index", {
-//     heading: "Dokoopy",
-//     time: new Date().toUTCString(),
-//   });
-// });
-
-app.get('/', (req, res) => {
-  Report.find({})
-  .then((data, err)=>{
-      if(err){
-          console.log(err);
-      }
-      res.render('image',{items: data})
-  })
+app.get("/", (req, res, next) => {
+  res.render("index", {
+    heading: "Dokoopy",
+    time: new Date().toUTCString(),
+  });
 });
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";

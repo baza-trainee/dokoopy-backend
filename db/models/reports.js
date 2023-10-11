@@ -4,9 +4,9 @@ const handleMongooseError = require("../../utils/handleMongooseError");
 
 const reportSchema = new Schema(
   {
-    report: {
-      data: Buffer,
-      contentType: String,
+    reportURL: {
+      type: String,
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }

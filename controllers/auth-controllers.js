@@ -1,4 +1,3 @@
-const fs = require("fs/promises");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const HttpError = require("../utils/HttpError");

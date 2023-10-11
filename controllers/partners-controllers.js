@@ -6,7 +6,7 @@ const { Partner } = require("../db/models/partners");
 const addPartner = async(req, res) => {
     let data;
     if (req.file) {
-        const uploaded = req.file.location;
+        const uploaded = req.file.path;
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }

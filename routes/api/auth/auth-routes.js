@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { authMiddleware } = require("../../../utils/authMiddleware");
+const { authMiddleware } = require("../../../middlewares/authMiddleware");
 
 const {
   login,
