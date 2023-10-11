@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const HttpError = require("../utils/HttpError");
+const HttpError = require("../utils/httpError");
 const controllerWrapper = require("../utils/controllerWrapper");
-const { RESET_PASSWORD_SECRET_KEY, BASE_URL, FRONT_LOCALHOST } = process.env;
+const { RESET_PASSWORD_SECRET_KEY, BASE_URL, JWT_SECRET, FRONT_LOCALHOST } = process.env;
 const { User } = require("../db/models/users");
 const resetPasswordHtml = require('../utils/resetPasswordEmail');
 const sendEmail = require('../utils/sendEmail');
@@ -25,7 +25,7 @@ const login = async (req, res) => {
         id: user._id,
     }
 
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: 3600 });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: 3600 });
     await User.findByIdAndUpdate(user._id, { token });
 
     res.status(201).json({

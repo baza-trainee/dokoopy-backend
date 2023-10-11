@@ -105,7 +105,7 @@
       }
     },
     "/auth/admin/logout": {
-      "get": {
+      "post": {
         "summary": "Logout user",
         "tags": ["Auth"],
         "description": "Removes active token from server. You need to add token in headers of request",
@@ -330,7 +330,7 @@
       }
     },
     "/projects/admin/{id}": {
-      "put": {
+      "patch": {
         "summary": "Update project info",
         "tags": [
           "Projects"
@@ -514,7 +514,7 @@
       }
     },
     "/partners/admin{id}": {
-      "put": {
+      "patch": {
         "summary": "Update partner info",
         "tags": [
           "Partners"
@@ -626,8 +626,8 @@
         }
       }
     },
-    "/contacts/admin": {
-      "put": {
+    "/contacts/admin/{id}": {
+      "patch": {
         "summary": "Update contacts info",
         "tags": [
           "Contacts"
@@ -798,7 +798,7 @@
       }
     },
     "/reports/admin/{id}": {
-      "put": {
+      "patch": {
         "summary": "Update report",
         "tags": [
           "Reports"
@@ -949,7 +949,7 @@
       }
     },
     "/hero/admin/{id}": {
-      "put": {
+      "patch": {
         "summary": "Update hero info",
         "tags": [
           "Heroes"
@@ -1061,8 +1061,8 @@
         }
       }
     },
-    "/bank/admin": {
-      "put": {
+    "/bank/admin/{id}": {
+      "patch": {
         "summary": "Update jar link",
         "tags": [
           "Bank"
@@ -1229,7 +1229,7 @@
           },
             "description": {
               "type": "string",
-              "example": "Це опис проекту"
+              "example": "Це опис проєкту"
           },
             "description_eng": {
               "type": "string",
@@ -1244,7 +1244,7 @@
       "AddProjectResponse": {
           "type": "object",
             "properties": {
-              "id": {
+              "_id": {
                 "type": "string",
                 "description": "Backend-generated unique identifier",
                 "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1273,23 +1273,18 @@
                   "description": "Project image url",
                   "example": "https://res.cloudinary.com/dwvdhkbkm/image/upload/v1697058515/dokoopy/o1tvpkyfeygpazxhuqba.jpg"
               },
-              "date": {
+              "createdAt": {
                 "type": "string",
-                "description": "the creation time of project (backend-generated)",
+                "example": "2023-05-15T10:51:30.531Z"
+              },
+              "updatedAt": {
+                "type": "string",
                 "example": "2023-05-15T10:51:30.531Z"
               }
           }
       },
       "UpdateProjectRequest": {
                 "type": "object",
-                "required": [
-                    "title",
-                    "title_eng",
-                    "description",
-                    "description_eng",
-                    "imageURL",
-                    "date"
-                ],
                 "properties": {
                     "title": {
                       "type": "string",
@@ -1310,10 +1305,6 @@
                     "imageURL": {
                         "type": "string",
                         "format": "binary"
-                    },
-                    "date": {
-                        "type": "string",
-                        "example": "06.09.2023"
                     }
                 }
       },
@@ -1342,7 +1333,7 @@
       "AddPartnerResponse": {
           "type": "object",
             "properties": {
-              "id": {
+              "_id": {
                 "type": "string",
                 "description": "Backend-generated unique identifier",
                 "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1361,16 +1352,19 @@
                   "type": "string",
                   "description": "Partner image url",
                   "example": "partners\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-05-15T10:51:30.531Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-05-15T10:51:30.531Z"
               }
           }
       },
       "UpdatePartnerRequest": {
                 "type": "object",
-                "required": [
-                    "title",
-                    "link",
-                    "imageURL"
-                ],
                 "properties": {
                     "title": {
                         "type": "string",
@@ -1388,16 +1382,29 @@
       },
       "UpdateContactResponse": {
         "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string",
-                        "example": "dokoopy@gmail.com"
-                    },
-                    "telegram": {
-                      "type": "string",
-                      "example": "@dokoopy"
-                    }
+            "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "6525c81a0337252aedd6124d"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "dokoopy@gmail.com"
+                },
+                "telegram": {
+                  "type": "string",
+                  "example": "@dokoopy"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-10-09T22:37:14.832Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-10-09T22:37:14.832Z"
                 }
+            }
       },
       "AddReportRequest": {
         "type": "object",
@@ -1414,7 +1421,7 @@
       "AddReportResponse": {
           "type": "object",
             "properties": {
-              "id": {
+              "_id": {
                 "type": "string",
                 "description": "Backend-generated unique identifier",
                 "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1468,7 +1475,7 @@
       "AddHeroResponse": {
           "type": "object",
             "properties": {
-              "id": {
+              "_id": {
                 "type": "string",
                 "description": "Backend-generated unique identifier",
                 "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1493,22 +1500,18 @@
                   "description": "Project image url",
                   "example": "heroes\\qtc7YIPFu7y55n-hrA0Nl_IMG_7842.JPG"
               },
-              "date": {
+              "createdAt": {
                 "type": "string",
-                "description": "the creation time of hero (backend-generated)",
+                "example": "2023-05-15T10:51:30.531Z"
+              },
+              "updatedAt": {
+                "type": "string",
                 "example": "2023-05-15T10:51:30.531Z"
               }
           }
       },
       "UpdateHeroRequest": {
                 "type": "object",
-                "required": [
-                    "title",
-                    "description",
-                    "description_eng",
-                    "imageURL",
-                    "date"
-                ],
                 "properties": {
                     "title": {
                         "type": "string",
@@ -1525,21 +1528,22 @@
                     "imageURL": {
                         "type": "string",
                         "format": "binary"
-                    },
-                    "date": {
-                        "type": "string",
-                        "example": "06.09.2023"
                     }
                 }
       },
       "UpdateBankLinkResponse": {
         "type": "object",
-                "properties": {
-                    "link": {
-                        "type": "string",
-                        "example": "monobank_link"
-                    }
-                }
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Backend-generated unique identifier",
+              "example": "mono_link"
+            },
+            "link": {
+              "type": "string",
+              "example": "mono_link"
+            }
+          }
       },
       "GetAllProjectsResponse": {
         "type": "object",
@@ -1549,7 +1553,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "_id": {
                   "type": "string",
                   "description": "Backend-generated unique identifier",
                   "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1579,9 +1583,12 @@
                   "description": "Link on project's photo",
                   "example": "projects\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
                 },
-                "date": {
+                "createdAt": {
                   "type": "string",
-                  "description": "Backend-generated date of project creation",
+                  "example": "2023-09-06T13:06:19.775Z"
+                },
+                "updatedAt": {
+                  "type": "string",
                   "example": "2023-09-06T13:06:19.775Z"
                 }
               }
@@ -1598,7 +1605,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "_id": {
                   "type": "string",
                   "description": "Backend-generated unique identifier",
                   "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1618,9 +1625,12 @@
                   "description": "Link on project's photo",
                   "example": "partners\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
                 },
-                "date": {
+                "createdAt": {
                   "type": "string",
-                  "description": "Backend-generated date of partner addition",
+                  "example": "2023-09-06T13:06:19.775Z"
+                },
+                "updatedAt": {
+                  "type": "string",
                   "example": "2023-09-06T13:06:19.775Z"
                 }
               }
@@ -1629,7 +1639,7 @@
           }
         }
       },
-      "GetAllReportResponse": {
+      "GetAllReportsResponse": {
         "type": "object",
         "properties": {
           "result": {
@@ -1637,7 +1647,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "_id": {
                   "type": "string",
                   "description": "Backend-generated unique identifier",
                   "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1645,7 +1655,7 @@
                 "reportURL": {
                   "type": "string",
                   "description": "Link on project's photo",
-                  "example": "partners\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                  "example": "https://res.cloudinary.com/dwvdhkbkm/image/upload/v1697059048/dokoopy/vlxpr3kfm2fwzjoungpo.pdf"
                 }
               }
             },
@@ -1656,6 +1666,11 @@
       "GetAllContactsResponse": {  
         "type": "object",
           "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Backend-generated unique identifier",
+              "example": "6525c81a0337252aedd6124d"
+            },
             "email": {
               "type": "string",
               "example": "dokoopy@gmail.com"
@@ -1669,6 +1684,11 @@
       "GetAllRequisitesResponse": {  
         "type": "object",
           "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Backend-generated unique identifier",
+              "example": "6525c81a0337252aedd6124d"
+            },
             "link": {
               "type": "string",
               "example": "mono_link"
@@ -1683,7 +1703,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "_id": {
                   "type": "string",
                   "description": "Backend-generated unique identifier",
                   "example": "GGHJlhkj668__hjkhjkhh$%"
@@ -1706,11 +1726,14 @@
                 "imageURL": {
                   "type": "string",
                   "description": "Link on hero's photo",
-                  "example": "heroes\\-SWk2ERNOBwlHLgJVpW07_IMG_7856.JPG"
+                  "example": "https://res.cloudinary.com/dwvdhkbkm/image/upload/v1697059077/dokoopy/gr5fchy2vggygzpxnk24.jpg"
                 },
-                "date": {
+                "createdAt": {
                   "type": "string",
-                  "description": "Backend-generated date of hero creation",
+                  "example": "2023-09-06T13:06:19.775Z"
+                },
+                "updatedAt": {
+                  "type": "string",
                   "example": "2023-09-06T13:06:19.775Z"
                 }
               }

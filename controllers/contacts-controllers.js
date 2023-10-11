@@ -1,6 +1,6 @@
 require("dotenv").config();
 const controllerWrapper = require("../utils/controllerWrapper");
-const HttpError = require("../utils/HttpError");
+const HttpError = require("../utils/httpError");
 const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
@@ -19,7 +19,7 @@ const updateContact = async(req, res) => {
 };
 
 const getAllContacts = async(req, res) => {
-    const contacts = await Contact.find({})
+    const contacts = await Contact.find({}, "-createdAt -updatedAt",)
 
     if (contacts.length === 0) {
         throw HttpError.NotFoundError("Contacts not found");

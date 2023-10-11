@@ -1,5 +1,5 @@
 require("dotenv").config();
-const HttpError = require("../utils/HttpError");
+const HttpError = require("../utils/httpError");
 const controllerWrapper = require("../utils/controllerWrapper");
 const { Partner } = require("../db/models/partners");
 

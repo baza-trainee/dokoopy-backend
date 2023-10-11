@@ -1,6 +1,6 @@
 require("dotenv").config();
 const controllerWrapper = require("../utils/controllerWrapper");
-const HttpError = require("../utils/HttpError");
+const HttpError = require("../utils/httpError");
 const { Bank } = require("../db/models/bank");
 
 const updateBank = async(req, res) => {
@@ -19,7 +19,7 @@ const updateBank = async(req, res) => {
 
 const getAllRequisites = async(req, res) => {
 
-    const bank = await Bank.find({})
+    const bank = await Bank.find({}, "-createdAt -updatedAt",)
   
     if (bank.length === 0) {
       throw HttpError.NotFoundError("Bank link not found");
