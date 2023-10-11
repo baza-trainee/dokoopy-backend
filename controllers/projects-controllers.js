@@ -1,39 +1,19 @@
-const fs = require('fs/promises');
 require("dotenv").config();
-const { nanoid } = require('nanoid');
-const path = require('path');
 const HttpError = require("../utils/HttpError");
 const controllerWrapper = require("../utils/controllerWrapper");
-
-
-const projectsPath = path.join(__dirname, '../db/projects/projects.json');
-const projectsDir = path.join(__dirname, '../', 'public', 'projects');
+const { Project } = require("../db/models/projects");
 
 const addProject = async(req, res) => {
 
-    const date = new Date();
-
-    const projects_data = await fs.readFile(projectsPath, 'utf-8');
-    const projects = JSON.parse(projects_data)
-    const image_id = nanoid();
-    const { path: tempUpload, originalname } = req.file;
-    const filename = `${image_id}_${originalname}`;
-    const resultUpload = path.join(projectsDir, filename);
-    await fs.rename(tempUpload, resultUpload);
-    const imageURL = path.join('projects', filename);
-    
-    const newProject = {
-        id: nanoid(),
-        title: req.body.title,
-        title_eng: req.body.title_eng,
-        description: req.body.description,
-        description_eng: req.body.description_eng,
-        imageURL,
-        date,
+    let data;
+    if (req.file) {
+        const uploaded = req.file.location;
+        data = { ...req.body, imageURL: uploaded}
+    } else {
+        data = { ...req.body }
     }
+    const newProject = await Project.create(data);
 
-    projects.push(newProject);
-    await fs.writeFile(projectsPath, JSON.stringify(projects, null, 2));
 
     res.status(201).json({
         status: 'success',
@@ -43,15 +23,12 @@ const addProject = async(req, res) => {
 };
 
 const deleteProject = async(req, res) => {
-    const projects_data = await fs.readFile(projectsPath, 'utf-8');
-    const projects = JSON.parse(projects_data);
+    const { id } = req.params;
 
-    const index = projects.findIndex(project => project.id === req.params.id);
-    if (index === -1) {
-        return null
+    const result = await Project.findByIdAndDelete(id);
+    if (!result) {
+        throw HttpError.NotFoundError("Project not found");
     }
-    projects.splice(index, 1);
-    await fs.writeFile(projectsPath, JSON.stringify(projects, null, 2));
     
     res.status(200).json({
         status: 'success',
@@ -61,37 +38,20 @@ const deleteProject = async(req, res) => {
 };
 
 const updateProject = async(req, res) => {
-    const projects_data = await fs.readFile(projectsPath, 'utf-8');
-    const projects = JSON.parse(projects_data);
-
-    const index = projects.findIndex(project => project.id === req.params.id);
-    if (index === -1) {
-        return null
-    };
-
-    let imageURL = "";
-    const image_id = nanoid();
+    const { id } = req.params;
+    let data;
     if (req.file) {
-        const { path: tempUpload, originalname } = req.file;
-        const filename = `${image_id}_${originalname}`;
-        const resultUpload = path.join(projectsDir, filename);
-        await fs.rename(tempUpload, resultUpload);
-        imageURL = path.join('projects', filename);
-    } else imageURL = req.body.imageURL;
-
-    const updProject = {
-        id: req.params.id,
-        title: req.body.title,
-        title_eng: req.body.title_eng,
-        description: req.body.description,
-        description_eng: req.body.description_eng,
-        imageURL,
-        date: projects[index].date,
+        const uploaded = req.file.location;
+        data = { ...req.body, imageURL: uploaded}
+    } else {
+        data = { ...req.body }
     }
 
-    projects.splice(index, 1, updProject);
-    await fs.writeFile(projectsPath, JSON.stringify(projects, null, 2));
+    const updProject = await Project.findByIdAndUpdate(id, data, { new: true });
 
+    if (!updProject) {
+        throw new HttpError(404, 'Project not found');
+    }
         res.status(200).json({
             status: 'success',
             code: 200,
@@ -101,12 +61,11 @@ const updateProject = async(req, res) => {
 
 const getAllProjects = async(req, res) => {
 
-    const projectsData = await fs.readFile(projectsPath, 'utf-8');
-    if (projectsData.length === 0) {
+    const projects = await Project.find({}).sort({ createdAt: -1 });
+
+    if (projects.length === 0) {
         throw HttpError.NotFoundError("Projects not found");
     }
-    const data = JSON.parse(projectsData);
-    const projects = data.sort((firstProject, secondProject) => new Date(secondProject.date) - new Date(firstProject.date))
 
     res.status(200).json({
         projects,
