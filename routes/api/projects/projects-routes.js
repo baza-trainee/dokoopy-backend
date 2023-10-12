@@ -3,7 +3,7 @@ const express = require('express');
 
 const { addProject, deleteProject, updateProject, getAllProjects } = require('../../../controllers/projects-controllers');
 const upload = require('../../../middlewares/upload');
-const { authMiddleware } = require('../../../middlewares/authMiddleware');
+const authMiddleware = require('../../../middlewares/authMiddleware');
 
 const router = express.Router();
 

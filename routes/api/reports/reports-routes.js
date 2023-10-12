@@ -3,7 +3,7 @@ const express = require('express');
 
 const { addReport, updateReport, getAllReports } = require('../../../controllers/reports-controllers');
 const upload = require('../../../middlewares/upload');
-const { authMiddleware } = require('../../../middlewares/authMiddleware');
+const authMiddleware = require('../../../middlewares/authMiddleware');
 
 const router = express.Router();
 

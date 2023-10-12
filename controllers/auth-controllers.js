@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const HttpError = require("../utils/httpError");
 const controllerWrapper = require("../utils/controllerWrapper");
-const { RESET_PASSWORD_SECRET_KEY, BASE_URL, JWT_SECRET, FRONT_LOCALHOST } = process.env;
+const { RESET_PASSWORD_SECRET_KEY, BASE_URL, JWT_SECRET, FRONT_LOCALHOST, FRONT_BASE_URL } = process.env;
 const { User } = require("../db/models/users");
 const resetPasswordHtml = require('../utils/resetPasswordEmail');
 const sendEmail = require('../utils/sendEmail');
@@ -71,7 +71,7 @@ const forgotPassword = async (req, res) => {
       to: email,
       subject: "Зміна паролю для входу на сайт Dokoopy",
       html: `${resetPasswordHtml}
-      target="_blank" href="${BASE_URL}/api/auth/reset-password/${resetToken}">Змінити пароль</a>
+      target="_blank" href="${FRONT_BASE_URL}/login/renew/token/${resetToken}">Змінити пароль</a>
       </div>
       `
   };
