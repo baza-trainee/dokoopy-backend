@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const HttpError = require("../utils/httpError");
+const HttpError = require("../utils/HttpError");
 const controllerWrapper = require("../utils/controllerWrapper");
 const { RESET_PASSWORD_SECRET_KEY, BASE_URL, JWT_SECRET, FRONT_LOCALHOST, FRONT_BASE_URL } = process.env;
 const { User } = require("../db/models/users");

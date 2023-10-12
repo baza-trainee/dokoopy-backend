@@ -1,5 +1,5 @@
 const { Report } = require("../db/models/reports");
-const HttpError = require("../utils/httpError");
+const HttpError = require("../utils/HttpError");
 const controllerWrapper = require("../utils/controllerWrapper");
 
 const addReport = async (req, res) => {

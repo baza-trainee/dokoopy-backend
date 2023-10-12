@@ -1,6 +1,6 @@
 require("dotenv").config();
 const controllerWrapper = require("../utils/controllerWrapper");
-const HttpError = require("../utils/httpError");
+const HttpError = require("../utils/HttpError");
 const { Hero } = require("../db/models/heroes");
 
 const addHero = async(req, res) => {

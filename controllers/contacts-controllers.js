@@ -1,6 +1,6 @@
 require("dotenv").config();
 const controllerWrapper = require("../utils/controllerWrapper");
-const HttpError = require("../utils/httpError");
+const HttpError = require("../utils/HttpError");
 const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
