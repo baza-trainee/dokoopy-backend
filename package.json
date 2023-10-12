@@ -39,10 +39,7 @@
     "multer-sftp": "^1.0.0",
     "multer-storage-cloudinary": "^4.0.0",
     "nanoid": "^3.3.4",
-    "npm": "^10.2.0",
     "queue": "^7.0.0",
-    "sftp-upload": "^1.0.4",
-    "ssh2-sftp-client": "^9.1.0",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
