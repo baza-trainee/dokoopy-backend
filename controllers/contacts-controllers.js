@@ -1,19 +1,17 @@
-const fs = require('fs/promises');
 require("dotenv").config();
-const path = require('path');
 const controllerWrapper = require("../utils/controllerWrapper");
-
-const contactsPath = path.join(__dirname, '../db/contacts/contacts.json');
+const HttpError = require("../utils/HttpError");
+const { Contact } = require("../db/models/contacts");
 
 const updateContact = async(req, res) => {
-    const updContact = {
-        email: req.body.email,
-        data: req.body.telegram,
-    }
+    const { id } = req.params;
+    const { email, telegram } = req.body;
 
-    await fs.writeFile(contactsPath, JSON.stringify(updContact, null, 2));
-    
-    res.status(200).json({
+    const updContact = await Contact.findByIdAndUpdate(id, {email: email, telegram: telegram}, {new: true});
+    if(!updContact) {
+        throw new HttpError(404, 'Contacts not found');
+    }
+    res.status(201).json({
         status: 'success',
         code: 200,
         updContact,
@@ -21,12 +19,11 @@ const updateContact = async(req, res) => {
 };
 
 const getAllContacts = async(req, res) => {
+    const contacts = await Contact.find({}, "-createdAt -updatedAt",)
 
-    const contactsData = await fs.readFile(contactsPath, 'utf-8');
-    if (contactsData.length === 0) {
+    if (contacts.length === 0) {
         throw HttpError.NotFoundError("Contacts not found");
     }
-    const contacts = JSON.parse(contactsData)
 
     res.status(200).json({
         contacts,

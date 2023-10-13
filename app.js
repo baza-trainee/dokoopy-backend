@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const bodyParser = require('body-parser');
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
@@ -31,6 +32,7 @@ app.use(logger(formatsLogger));
 app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(
   cors({

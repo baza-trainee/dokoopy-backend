@@ -3,13 +3,13 @@ const express = require('express');
 
 const { addReport, updateReport, getAllReports } = require('../../../controllers/reports-controllers');
 const upload = require('../../../middlewares/upload');
-const { authMiddleware } = require('../../../utils/authMiddleware');
+const authMiddleware = require('../../../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.post('/admin', upload.single('reportURL'), addReport);
-router.put('/admin/:id', upload.single('reportURL'), updateReport);
+router.post('/admin', authMiddleware, upload.single('reportURL'), addReport);
+router.patch('/admin/:id', authMiddleware, upload.single('reportURL'), updateReport);
 router.get('/', getAllReports);
-router.get('/admin', getAllReports);
+router.get('/admin', authMiddleware, getAllReports);
 
 module.exports = router;
