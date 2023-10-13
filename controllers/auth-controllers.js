@@ -71,7 +71,7 @@ const forgotPassword = async (req, res) => {
       to: email,
       subject: "Зміна паролю для входу на сайт Dokoopy",
       html: `${resetPasswordHtml}
-      target="_blank" href="${FRONT_BASE_URL}/login/renew/token/${user._id}${resetToken}">Змінити пароль</a>
+      target="_blank" href="${FRONT_BASE_URL}/login/renew/token/${user._id}/${resetToken}">Змінити пароль</a>
       </div>
       `
   };

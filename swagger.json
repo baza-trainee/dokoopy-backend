@@ -211,7 +211,7 @@
         }
       }
     },
-    "/auth/admin/reset-password/{resetToken}": {
+    "/auth/reset-password/{id}/{resetToken}": {
       "post": {
         "summary": "Reset password",
         "tags": [
@@ -220,6 +220,15 @@
         "description": "Write new password to the Database",
         "operationId": "resetPassword",
         "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Backend-generated unique user id from the DB"
+            }
+          },
           {
             "name": "resetToken",
             "in": "params",
@@ -247,13 +256,13 @@
               "application/json": {
                 "schema": {
                   "type": "String",
-                  "example": "Reset password is succesful"
+                  "example": "Reset password email sent"
                 }
               }
             }
           },
-          "403": {
-            "description": "Reset token is expired"
+          "404": {
+            "description": "User not found"
           }
         }
       }
