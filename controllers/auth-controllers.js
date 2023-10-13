@@ -86,8 +86,8 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const {id, resetToken} = req.params;
-  const {password} = req.body;
+  const { id, resetToken } = req.params;
+  const { password } = req.body;
 
   jwt.verify(resetToken, RESET_PASSWORD_SECRET_KEY, function(err, decoded) {
       if (err) {

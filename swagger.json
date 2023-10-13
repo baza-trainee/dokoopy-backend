@@ -513,7 +513,7 @@
         }
       }
     },
-    "/partners/admin{id}": {
+    "/partners/admin/{id}": {
       "patch": {
         "summary": "Update partner info",
         "tags": [
@@ -674,9 +674,11 @@
             "description": "Not authorized"
           }
         }
-      },
+      }
+    },
+    "/contacts/admin": {
       "get": {
-        "summary": "Get all reports for the admin panel",
+        "summary": "Get all contacts for the admin panel",
         "tags": [
           "Contacts"
         ],
@@ -706,7 +708,7 @@
     },
     "/contacts": {
       "get": {
-        "summary": "Get all reports for the main page",
+        "summary": "Get all contacts for the main page",
         "tags": [
           "Contacts"
         ],

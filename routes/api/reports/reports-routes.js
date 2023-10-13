@@ -7,7 +7,7 @@ const authMiddleware = require('../../../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.post('/admin', authMiddleware, upload.single('reportURL'), addReport);
+router.patch('/admin', authMiddleware, upload.single('reportURL'), addReport);
 router.put('/admin/:id', authMiddleware, upload.single('reportURL'), updateReport);
 router.get('/', getAllReports);
 router.get('/admin', authMiddleware, getAllReports);
