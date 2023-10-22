@@ -6,9 +6,7 @@ const { Hero } = require("../db/models/heroes");
 const addHero = async(req, res) => {
     let data;
     if (req.file) {
-        console.log(req.file)
         const uploaded = req.file.path;
-        console.log(uploaded)
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }
@@ -41,8 +39,7 @@ const updateHero = async(req, res) => {
     const { id } = req.params;
     let data;
     if (req.file) {
-        console.log(req.file)
-        const uploaded = req.file.location;
+        const uploaded = req.file.path;
         data = { ...req.body, imageURL: uploaded}
     } else {
         data = { ...req.body }
