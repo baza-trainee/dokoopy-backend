@@ -48,5 +48,3 @@ module.exports = {
     updateReport: controllerWrapper(updateReport),
     getAllReports: controllerWrapper(getAllReports),
 };
-
-console.log(a.length);
