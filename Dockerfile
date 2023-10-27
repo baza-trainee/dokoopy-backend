@@ -6,6 +6,7 @@ COPY . .
 
 COPY package.json .
 RUN npm install
+RUN npm rebuild bcrypt
 
 EXPOSE $PORT
 CMD npm run start
