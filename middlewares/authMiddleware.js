@@ -12,7 +12,6 @@ const authMiddleware = async (req, res, next) => {
 
     try {
         const { id } = jwt.verify(token, JWT_SECRET);
-        console.log(id)
         const user = await User.findById(id);
         if(!user || !user.token) {
             next(new HttpError(404, "User not found"))
